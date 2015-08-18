@@ -336,7 +336,9 @@ $(document).ready(function() {
                     var csrfData = getCSRFRequestHeader();
                     xhr.setRequestHeader(csrfData['header'], csrfData['token']);
                 },
-                success: reloadCards(data["project"]),
+                success: function(callback) {
+                    reloadCards(data["project"]);
+                },
                 error: function (callback) {
                     console.log("Request failed.");
                 }
