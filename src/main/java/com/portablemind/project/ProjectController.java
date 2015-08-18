@@ -14,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
 /**
@@ -38,17 +36,13 @@ public class ProjectController {
 
     private String viewPath = "controller/project/";
 
-    public ProjectController() {
-        super();
-    }
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<Response> addProject(  @RequestParam("file") MultipartFile file) {
-        System.out.println(file.getName());
-       /* project.setOwner(UserUtilities.getLoggedUserId());
+    public @ResponseBody ResponseEntity<Response> addProject(@RequestBody Project project) {
+        project.setOwner(UserUtilities.getLoggedUserId());
 
         projectService.saveProject(project);
-*/
+
         return new ResponseEntity<Response>(new Response("message", "New project successfully added!"), HttpStatus.OK);
     }
 
