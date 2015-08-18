@@ -6,7 +6,7 @@
         <h4 class="modal-title">Add new project</h4>
       </div>
       <div class="modal-body">
-        <form method="POST" id="add-project-form" action="${pageContext.request.contextPath}/project/add" class="form-horizontal" enctype="multipart/form-data">
+        <form method="POST" id="add-project-form" action="${pageContext.request.contextPath}/project/add" class="form-horizontal">
 
           <div class="form-group">
             <label class="control-label col-sm-3" for="projectName">Name: </label>
@@ -19,13 +19,6 @@
             <label class="control-label col-sm-3" for="projectDescription">Description:</label>
             <div class="col-sm-5">
               <textarea type="text" name="description" class="form-control" rows="6"></textarea>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-sm-3" for="projectIcon">Icon: </label>
-            <div class="col-sm-5">
-              <input type="file" name="file" class="form-control"/>
             </div>
           </div>
 

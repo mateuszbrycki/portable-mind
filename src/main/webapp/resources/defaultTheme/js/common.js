@@ -222,7 +222,7 @@ $(document).ready(function() {
         if(frm.valid()) {
             $.ajax({
                 contentType: "application/json; charset=utf-8",
-                dataType: false,
+                dataType: "json",
                 type: frm.attr('method'),
                 url: frm.attr('action'),
                 data: JSON.stringify(data),
