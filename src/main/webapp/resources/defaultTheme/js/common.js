@@ -3,6 +3,11 @@
  */
 
 function refreshBoardTable(data) {
+
+    if (!$('#projects-list').length) {
+        return;
+    }
+
     var oldPanelGroup = document.getElementById('panel-group');
     var newPanelGroup = document.createElement('div');
     newPanelGroup.id = 'panel-group';
@@ -26,6 +31,53 @@ function refreshBoardTable(data) {
 
             panelHeadingHA.appendChild(aText);
             panelHeadingH.appendChild(panelHeadingHA);
+            panelHeading.appendChild(panelHeadingH);
+            panelDefault.appendChild(panelHeading);
+
+            var panelCollapse = document.createElement('div');
+            panelCollapse.id = 'collapse' + i;
+            panelCollapse.className = 'panel-collapse collapse in';
+
+            var panelBody = document.createElement('div');
+            panelBody.className = 'panel-body';
+
+            var projectDescription = document.createTextNode(data[i].description);
+
+            panelBody.appendChild(projectDescription);
+            panelCollapse.appendChild(panelBody);
+
+            panelDefault.appendChild(panelCollapse);
+        }
+        newPanelGroup.appendChild(panelDefault);
+    }
+    oldPanelGroup.parentElement.replaceChild(newPanelGroup, oldPanelGroup);
+}
+
+function refreshCardList(data) {
+
+    if (!$('#card-list').length) {
+       return;
+    }
+
+    var oldPanelGroup = document.getElementById('panel-group');
+    var newPanelGroup = document.createElement('div');
+    newPanelGroup.id = 'panel-group';
+
+    for(var i = 0; i < data.length; i++){
+        var panelDefault = null;
+        if(data[i]){
+            panelDefault = document.createElement('div');
+            panelDefault.className = 'panel panel-default';
+
+            var panelHeading = document.createElement('div');
+            panelHeading.className = 'panel-heading';
+
+            var panelHeadingH = document.createElement('h4');
+            panelHeadingH.className = 'panel-title';
+
+            var aText = document.createTextNode(data[i].category.name);
+
+            panelHeadingH.appendChild(aText);
             panelHeading.appendChild(panelHeadingH);
             panelDefault.appendChild(panelHeading);
 
@@ -84,6 +136,23 @@ function reloadBoard() {
             xhr.setRequestHeader(csrfData['header'], csrfData['token']);
         },
         success : refreshBoardTable,
+        error : function(){
+            console.log("Request failed.");
+        }
+    });
+}
+
+function reloadCards(projectId) {
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        type: "GET",
+        url:  ctx + "/card/project/" + projectId,
+        beforeSend: function(xhr) {
+            var csrfData = getCSRFRequestHeader();
+            xhr.setRequestHeader(csrfData['header'], csrfData['token']);
+        },
+        success : refreshCardList,
         error : function(){
             console.log("Request failed.");
         }
@@ -231,7 +300,6 @@ $(document).ready(function() {
                     xhr.setRequestHeader(csrfData['header'], csrfData['token']);
                 },
                 success: function(callback) {
-                    //reloadCardCategories();
                     reloadBoard();
                 },
                 error: function (callback) {
@@ -246,7 +314,6 @@ $(document).ready(function() {
         var frm = $('#add-card-form');
         e.preventDefault();
 
-        var Form = this;
         var data = {};
 
         $.each(this, function(i, v){
@@ -269,7 +336,7 @@ $(document).ready(function() {
                     var csrfData = getCSRFRequestHeader();
                     xhr.setRequestHeader(csrfData['header'], csrfData['token']);
                 },
-                success: reloadBoard,
+                success: reloadCards(data["project"]),
                 error: function (callback) {
                     console.log("Request failed.");
                 }

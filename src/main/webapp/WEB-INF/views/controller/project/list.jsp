@@ -8,19 +8,21 @@
   <jsp:include page="../card/form/add_card.jsp" />
   <button type="button" id="show-add-card-form" class="btn btn-primary" data-dismiss="modal" style="margin: 2px;">Add card</button>
 
-  <table class="table table-striped table-bordered table-hover table-condensed" id="cards-list">
-    <tbody id="cards-list-body">
-    <tr id="cards-list-title">
-      <td><strong>Category name</strong></td>
-      <td><strong>Description</strong></td>
-    </tr>
+  <div id="card-list">
+    <div id="panel-group" id="accordion">
       <c:forEach items="${cards}" var="card">
-        <tr>
-          <td>${card.category.name}</td>
-          <td>${card.description}</td>
-        </tr>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            ${card.category.name}
+          </div>
+          <div id="collapse${card.id}" class="panel-collapse collapse in" aria-expanded="true">
+            <div class="panel-body">
+                ${card.description}
+            </div>
+          </div>
+        </div>
       </c:forEach>
-    </tbody>
-  </table>
+    </div>
+  </div>
 </body>
 </html>

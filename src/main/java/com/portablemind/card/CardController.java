@@ -54,7 +54,7 @@ public class CardController {
         return new ResponseEntity<Response>(new Response("message", "Card successfully added."), HttpStatus.OK);
     }
     
-    @RequestMapping(value="/cards", method = RequestMethod.POST)
+    @RequestMapping(value="/all", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<List<Card>> getAllUserCards() {
 
         Integer userId = UserUtilities.getLoggedUserId();
@@ -63,6 +63,17 @@ public class CardController {
 
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }
+
+    @RequestMapping(value="/project/{projectId}", method = RequestMethod.GET)
+    public @ResponseBody ResponseEntity<List<Card>> getAllUserProjectCards(@PathVariable("projectId") Integer projectId) {
+
+        Integer userId = UserUtilities.getLoggedUserId();
+
+        List<Card> cards = cardService.findAllUserProjectCards(userId, projectId);
+
+        return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
+    }
+
 
     @RequestMapping(value="/delete/{id}", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<Response> deleteCard(@PathVariable("id") Integer id) {

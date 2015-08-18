@@ -18,6 +18,8 @@ public interface CardService {
 
     List<Card> findAllProjectCards(Integer id);
 
+    List<Card> findAllUserProjectCards(Integer id, Integer projectId);
+
     Card findById(Integer id);
 
     Integer getCardOwner(Integer id);

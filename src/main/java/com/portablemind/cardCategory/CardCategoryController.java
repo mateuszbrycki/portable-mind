@@ -33,7 +33,7 @@ public class CardCategoryController {
         return new ResponseEntity<Response>(new Response("message", "New card category successfully added!"), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/categories", method = RequestMethod.GET)
+    @RequestMapping(value="/all", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<List<CardCategory>> getAvailableCategories() {
 
         List<CardCategory> categories =  service.findAllUserCardCategories(UserUtilities.getLoggedUserId());

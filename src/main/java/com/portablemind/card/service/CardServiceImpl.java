@@ -31,6 +31,8 @@ public class CardServiceImpl implements CardService {
 
     public List<Card> findAllProjectCards(Integer id) {return dao.findAllProjectCards(id); }
 
+    public List<Card> findAllUserProjectCards(Integer id, Integer projectId) {return dao.findAllUserProjectCards(id, projectId); }
+
     public Card findById(Integer id) {
         return dao.findById(id);
     }

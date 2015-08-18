@@ -66,6 +66,21 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
         return cards;
     }
 
+    public List<Card> findAllUserProjectCards(Integer id, Integer projectId) {
+        Query query = getSession().createSQLQuery("SELECT c.* FROM card c WHERE c.fk_project_id = :id AND fk_project_id = :projectId");
+        query.setString("id", id.toString());
+        query.setString("projectId", projectId.toString());
+        List<Object[]> result = query.list();
+
+        List<Card> cards = new ArrayList<Card>();
+
+        for(Object[] card : result) {
+            cards.add(this.mapCardObject(card));
+        }
+
+        return cards;
+    }
+
     public Card findById(Integer id) {
         Query query = getSession().createSQLQuery("SELECT c.* FROM card c WHERE c.id = :id LIMIT 1");
         query.setString("id", id.toString());

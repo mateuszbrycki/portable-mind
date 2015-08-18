@@ -22,8 +22,8 @@
 		</form>
 
 		<div id="projects-list">
-			<div id="panel-group" id="accordion">
-				<c:forEach items="${projects}" var="project">
+		<div id="panel-group" id="accordion">
+			<c:forEach items="${projects}" var="project">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title">
@@ -32,13 +32,13 @@
 					</div>
 					<div id="collapse${project.id}" class="panel-collapse collapse in" aria-expanded="true">
 						<div class="panel-body">
-							${project.description}
+								${project.description}
 						</div>
 					</div>
 				</div>
-				</c:forEach>
-			</div>
+			</c:forEach>
 		</div>
+	</div>
 
 	</sec:authorize>
 </body>
