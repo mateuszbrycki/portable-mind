@@ -51,6 +51,7 @@ function refreshBoardTable(data) {
         newPanelGroup.appendChild(panelDefault);
     }
     oldPanelGroup.parentElement.replaceChild(newPanelGroup, oldPanelGroup);
+    SyntaxHighlighter.all();
 }
 
 function refreshCardList(data) {
@@ -98,6 +99,7 @@ function refreshCardList(data) {
         newPanelGroup.appendChild(panelDefault);
     }
     oldPanelGroup.parentElement.replaceChild(newPanelGroup, oldPanelGroup);
+    SyntaxHighlighter.all();
 }
 
 function refreshCardCategoriesSelect(data) {
@@ -123,6 +125,7 @@ function refreshCardCategoriesSelect(data) {
     }
     newSelectDiv.appendChild(newSelect);
     oldSelectDiv.parentNode.replaceChild(newSelectDiv, oldSelectDiv);
+    SyntaxHighlighter.all();
 }
 
 function reloadBoard() {
