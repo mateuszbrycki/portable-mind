@@ -67,7 +67,7 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
     }
 
     public List<Card> findAllUserProjectCards(Integer id, Integer projectId) {
-        Query query = getSession().createSQLQuery("SELECT c.* FROM card c WHERE c.fk_project_id = :id AND fk_project_id = :projectId");
+        Query query = getSession().createSQLQuery("SELECT c.* FROM card c WHERE c.fk_user_id = :id AND fk_project_id = :projectId");
         query.setString("id", id.toString());
         query.setString("projectId", projectId.toString());
         List<Object[]> result = query.list();

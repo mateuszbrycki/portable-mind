@@ -10,6 +10,11 @@ public class UserUtilities {
 
     public static Integer getLoggedUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if(auth.getPrincipal() instanceof String) {
+            return 0;
+        }
+
         UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
 
         return currentUser.getId();
