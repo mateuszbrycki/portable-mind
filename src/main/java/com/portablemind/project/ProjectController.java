@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 /**
@@ -73,6 +74,19 @@ public class ProjectController {
 
         return this.viewPath + "list";
 
+    }
+
+    @RequestMapping(value="/{projectId}", method = RequestMethod.DELETE)
+    public @ResponseBody ResponseEntity<Response> deleteAction(@PathVariable("projectId") Integer projectId) {
+
+        if(projectService.findById(projectId).getOwner() != UserUtilities.getLoggedUserId()) {
+            return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
+
+        }
+
+        projectService.deleteProjectById(projectId);
+
+        return new ResponseEntity<Response>(new Response("message", "NProject deleted!"), HttpStatus.OK);
     }
 
 }

@@ -178,9 +178,9 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
 -- Ograniczenia dla tabeli `card`
 --
 ALTER TABLE `card`
-ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`fk_category_id`) REFERENCES `card_category` (`id`),
-ADD CONSTRAINT `fk_project_id` FOREIGN KEY (`fk_project_id`) REFERENCES `project` (`id`),
-ADD CONSTRAINT `fk_user_id_card` FOREIGN KEY (`fk_user_id`) REFERENCES `user` (`id`);
+ADD CONSTRAINT `fk_category_id` FOREIGN KEY (`fk_category_id`) REFERENCES `card_category` (`id`) ON DELETE CASCADE,
+ADD CONSTRAINT `fk_project_id` FOREIGN KEY (`fk_project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
+ADD CONSTRAINT `fk_user_id_card` FOREIGN KEY (`fk_user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `card_category`
