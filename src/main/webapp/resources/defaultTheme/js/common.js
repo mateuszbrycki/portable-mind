@@ -123,10 +123,39 @@ function refreshCardList(data) {
             panelCollapse.appendChild(panelBody);
 
             panelDefault.appendChild(panelCollapse);
+
+            var panelFooter = document.createElement('div');
+            panelFooter.className = 'panel-footer clearfix';
+
+            var footerButtons = document.createElement('div');
+            footerButtons.className = 'footer-buttons';
+
+            var editButton = document.createElement('button');
+            editButton.className = 'edit-card btn btn-primary';
+            editButton.type = 'button';
+
+            var editText = document.createTextNode('Edit');
+            editButton.appendChild(editText);
+
+            var deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-card btn btn-danger';
+            deleteButton.type = 'button';
+            deleteButton.setAttribute('href', ctx + '/card/' + data[i].id);
+
+            var deleteText = document.createTextNode('Delete');
+            deleteButton.appendChild(deleteText);
+
+            footerButtons.appendChild(editButton);
+            footerButtons.appendChild(deleteButton);
+
+            panelFooter.appendChild(footerButtons);
+
+            panelDefault.appendChild(panelFooter);
         }
         newPanelGroup.appendChild(panelDefault);
     }
     oldPanelGroup.parentElement.replaceChild(newPanelGroup, oldPanelGroup);
+
 }
 
 function refreshCardCategoriesSelect(data) {
@@ -383,14 +412,37 @@ $(document).ready(function() {
         $.ajax({
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            type: "POST",
+            type: "DELETE",
             url:  ctx + $(this).attr('href'),
             beforeSend: function(xhr) {
                 var csrfData = getCSRFRequestHeader();
                 xhr.setRequestHeader(csrfData['header'], csrfData['token']);
             },
-            success : reloadBoard,
+            success : function() {
+                reloadCards(projectId)
+            },
             error : function (callback) {
+                console.log("Request failed.");
+            }
+        });
+    });
+
+    $(document).on('click', '.delete-project', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "DELETE",
+            url: $(this).attr('href'),
+            beforeSend: function(xhr) {
+                var csrfData = getCSRFRequestHeader();
+                xhr.setRequestHeader(csrfData['header'], csrfData['token']);
+            },
+            success: function(callback) {
+                reloadBoard();
+            },
+            error: function (callback) {
                 console.log("Request failed.");
             }
         });
@@ -427,27 +479,5 @@ $(document).ready(function() {
     $(document).on('click', '.add-card-category-form-close', function() {
         refreshForm($('#add-card-category-form'));
         $("#add-card-category-modal").modal('hide');
-    });
-
-    $(document).on('click', '.delete-project', function(e) {
-        e.preventDefault();
-        var destination = $(this).attr('href');
-
-        $.ajax({
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "DELETE",
-            url: destination,
-            beforeSend: function(xhr) {
-                var csrfData = getCSRFRequestHeader();
-                xhr.setRequestHeader(csrfData['header'], csrfData['token']);
-            },
-            success: function(callback) {
-                reloadBoard();
-            },
-            error: function (callback) {
-                console.log("Request failed.");
-            }
-        });
     });
 });

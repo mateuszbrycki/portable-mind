@@ -71,7 +71,6 @@ public class ProjectController {
         List<CardCategory> cardCategories = cardCategoryService.findAllUserCardCategories(userId);
         model.addAttribute("cardCategories", cardCategories);
 
-
         return this.viewPath + "list";
 
     }
@@ -86,7 +85,7 @@ public class ProjectController {
 
         projectService.deleteProjectById(projectId);
 
-        return new ResponseEntity<Response>(new Response("message", "NProject deleted!"), HttpStatus.OK);
+        return new ResponseEntity<Response>(new Response("message", "Project deleted!"), HttpStatus.OK);
     }
 
 }

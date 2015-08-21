@@ -1,0 +1,18 @@
+Ścieżki:
+
+	Project: /project
+		/add - POST (dodanie nowego projektu przez użytkownika) - @ResponseBody
+		/all - GET (lista wszystkich projektów użytkownika) - @ResponseBody
+		/{projectId} - GET (widok projektu) - String (view)
+		/{projectId} - DELETE - @ResponseBody
+	Card: /card
+		/add - PUT (dodanie nowej karty) - @ResponseBody
+		/all - GET (lista wszystkich kart) - @ResponseBody
+		/{id} - DELETE (usunięcie karty) - @ResponseBody
+		/edit/{id} - POST (edycja karty) - @ResponseBody
+		/project/{projectId} - GET (lista kart w danym projekcie) - @ResponseBody
+	CardCategory: /cardCategory
+		/add - PUT (dodanie nowej kategorii) @ResponseBody
+		/all - GET (lista wszystkich kategorii) @ResponseBody
+	BoardController: - /board
+		/ - GET (lista projektów) - String (view)

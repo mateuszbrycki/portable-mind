@@ -75,8 +75,8 @@ public class CardController {
     }
 
 
-    @RequestMapping(value="/delete/{id}", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<Response> deleteCard(@PathVariable("id") Integer id) {
+    @RequestMapping(value="/{cardId}", method = RequestMethod.DELETE)
+    public @ResponseBody ResponseEntity<Response> deleteCard(@PathVariable("cardId") Integer id) {
 
         if(cardService.getCardOwner(id) != UserUtilities.getLoggedUserId()) {
             return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);

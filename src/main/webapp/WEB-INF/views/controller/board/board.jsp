@@ -38,7 +38,7 @@
 					<div class="panel-footer clearfix">
 						<div class="footer-buttons">
 							<button type="button" class="edit-project btn btn-primary">Edit</button>
-							<button type="button" class="btn btn-danger delete-project" href="${pageContext.request.contextPath}/project/${project.id}">Delete</button>
+							<button type="button" class="delete-project btn btn-danger" href="${pageContext.request.contextPath}/project/${project.id}">Delete</button>
 						</div>
 					</div>
 				</div>
