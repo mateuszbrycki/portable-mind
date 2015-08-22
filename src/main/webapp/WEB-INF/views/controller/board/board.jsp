@@ -10,8 +10,14 @@
 		<jsp:include page="../card/form/add_card.jsp" />
 		<jsp:include page="../project/form/add_project.jsp" />
 
-		<button type="button" id="show-add-project-form" class="btn btn-primary" data-dismiss="modal" style="margin: 2px;">Add project</button>
-		<button type="button" id="show-add-card-form" class="btn btn-primary" data-dismiss="modal" style="margin: 2px;">Add card</button>
+		<button type="button" id="show-add-project-form" class="btn btn-primary" data-dismiss="modal" style="margin: 2px;">
+			<span class="glyphicon glyphicon-plus"></span>
+			Add project
+		</button>
+		<button type="button" id="show-add-card-form" class="btn btn-primary" data-dismiss="modal" style="margin: 2px;">
+			<span class="glyphicon glyphicon-plus"></span>
+			Add card
+		</button>
 
 		<c:url var="logoutUrl" value="/j_spring_security_logout"/>
 		<form action="${logoutUrl}" method="post" id="logoutForm" style="float: right;">
@@ -37,8 +43,8 @@
 					</div>
 					<div class="panel-footer clearfix">
 						<div class="footer-buttons">
-							<button type="button" class="edit-project btn btn-primary">Edit</button>
-							<button type="button" class="delete-project btn btn-danger" href="${pageContext.request.contextPath}/project/${project.id}">Delete</button>
+							<button type="button" class="edit-project btn btn-primary"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+							<button type="button" class="delete-project btn btn-danger" href="${pageContext.request.contextPath}/project/${project.id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
 						</div>
 					</div>
 				</div>
