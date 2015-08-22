@@ -7,26 +7,6 @@
 	<%--<%=TranslationHelper.getTranslation("mainHeader")%>--%>
 
 	<sec:authorize access="isAuthenticated()">
-		<jsp:include page="../card/form/add_card.jsp" />
-		<jsp:include page="../project/form/add_project.jsp" />
-
-		<button type="button" id="show-add-project-form" class="btn btn-primary" data-dismiss="modal" style="margin: 2px;">
-			<span class="glyphicon glyphicon-plus"></span>
-			Add project
-		</button>
-		<button type="button" id="show-add-card-form" class="btn btn-primary" data-dismiss="modal" style="margin: 2px;">
-			<span class="glyphicon glyphicon-plus"></span>
-			Add card
-		</button>
-
-		<c:url var="logoutUrl" value="/j_spring_security_logout"/>
-		<form action="${logoutUrl}" method="post" id="logoutForm" style="float: right;">
-
-			<input type="submit" id="login-user" name="submit" value="Logout" class="btn btn-primary"/>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
-		</form>
-
 		<div id="projects-list">
 		<div id="panel-group" id="accordion">
 			<c:forEach items="${projects}" var="project">

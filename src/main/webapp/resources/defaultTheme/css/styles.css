@@ -13,3 +13,7 @@
 .footer-buttons {
     float: right;
 }
+
+.footer-buttons .btn {
+    margin: 0 2.5px;
+}

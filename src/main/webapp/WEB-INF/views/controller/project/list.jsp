@@ -6,12 +6,6 @@
 
   <script>var projectId = "${project.id}"</script>
 
-  <jsp:include page="../card/form/add_card.jsp" />
-  <button type="button" id="show-add-card-form" class="btn btn-primary" data-dismiss="modal" style="margin: 2px;">
-    <span class="glyphicon glyphicon-plus"></span>
-    Add card
-  </button>
-
   <div id="card-list">
     <div id="panel-group" id="accordion">
       <c:forEach items="${cards}" var="card">

@@ -58,7 +58,11 @@ function refreshBoardTable(data) {
             editButton.className = 'edit-project btn btn-primary';
             editButton.type = 'button';
 
-            var editText = document.createTextNode('Edit');
+            var editGlyphicon = document.createElement('span');
+            editGlyphicon.className = 'glyphicon glyphicon-edit';
+            var editText = document.createTextNode(' Edit');
+
+            editButton.appendChild(editGlyphicon);
             editButton.appendChild(editText);
 
             var deleteButton = document.createElement('button');
@@ -66,7 +70,11 @@ function refreshBoardTable(data) {
             deleteButton.type = 'button';
             deleteButton.setAttribute('href', ctx + '/project/' + data[i].id);
 
-            var deleteText = document.createTextNode('Delete');
+            var deleteGlyphicon = document.createElement('span');
+            deleteGlyphicon.className = 'glyphicon glyphicon-remove';
+            var deleteText = document.createTextNode(' Delete');
+
+            deleteButton.appendChild(deleteGlyphicon);
             deleteButton.appendChild(deleteText);
 
             footerButtons.appendChild(editButton);
@@ -135,7 +143,11 @@ function refreshCardList(data) {
             editButton.className = 'edit-card btn btn-primary';
             editButton.type = 'button';
 
-            var editText = document.createTextNode('Edit');
+            var editGlyphicon = document.createElement('span');
+            editGlyphicon.className = 'glyphicon glyphicon-edit';
+            var editText = document.createTextNode(' Edit');
+
+            editButton.appendChild(editGlyphicon);
             editButton.appendChild(editText);
 
             var deleteButton = document.createElement('button');
@@ -143,7 +155,11 @@ function refreshCardList(data) {
             deleteButton.type = 'button';
             deleteButton.setAttribute('href', ctx + '/card/' + data[i].id);
 
+            var deleteGlyphicon = document.createElement('span');
+            deleteGlyphicon.className = 'glyphicon glyphicon-remove';
             var deleteText = document.createTextNode('Delete');
+
+            deleteButton.appendChild(deleteGlyphicon);
             deleteButton.appendChild(deleteText);
 
             footerButtons.appendChild(editButton);
