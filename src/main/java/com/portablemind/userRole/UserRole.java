@@ -1,4 +1,4 @@
-package com.portablemind.userRole;
+package com.portablemind.userrole;
 
 import com.sun.istack.internal.NotNull;
 

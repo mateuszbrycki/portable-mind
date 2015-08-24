@@ -1,6 +1,6 @@
-package com.portablemind.userRole.service;
+package com.portablemind.userrole.service;
 
-import com.portablemind.userRole.UserRole;
+import com.portablemind.userrole.UserRole;
 
 import java.util.Set;
 

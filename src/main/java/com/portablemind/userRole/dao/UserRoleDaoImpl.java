@@ -1,8 +1,8 @@
-package com.portablemind.userRole.dao;
+package com.portablemind.userrole.dao;
 
 import com.portablemind.app.AbstractDao;
-import com.portablemind.userRole.UserRole;
-import com.portablemind.userRole.service.UserRoleService;
+import com.portablemind.userrole.UserRole;
+import com.portablemind.userrole.service.UserRoleService;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

@@ -2,7 +2,7 @@ package com.portablemind.user.dao;
 
 import com.portablemind.app.AbstractDao;
 import com.portablemind.user.User;
-import com.portablemind.userRole.service.UserRoleService;
+import com.portablemind.userrole.service.UserRoleService;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;

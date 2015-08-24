@@ -1,7 +1,7 @@
-package com.portablemind.userRole.service;
+package com.portablemind.userrole.service;
 
-import com.portablemind.userRole.UserRole;
-import com.portablemind.userRole.dao.UserRoleDao;
+import com.portablemind.userrole.UserRole;
+import com.portablemind.userrole.dao.UserRoleDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +14,7 @@ import java.util.Set;
 @Service("userRoleService")
 @Transactional
 public class UserRoleServiceImpl implements UserRoleService {
+
     @Autowired
     private UserRoleDao userRoleDao;
 

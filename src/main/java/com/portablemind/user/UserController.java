@@ -1,7 +1,7 @@
 package com.portablemind.user;
 
 import com.portablemind.user.service.UserService;
-import com.portablemind.userRole.service.UserRoleService;
+import com.portablemind.userrole.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -1,6 +1,6 @@
 package com.portablemind.user;
 
-import com.portablemind.userRole.UserRole;
+import com.portablemind.userrole.UserRole;
 import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;

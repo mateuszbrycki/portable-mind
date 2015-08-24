@@ -1,6 +1,6 @@
-package com.portablemind.userRole.dao;
+package com.portablemind.userrole.dao;
 
-import com.portablemind.userRole.UserRole;
+import com.portablemind.userrole.UserRole;
 
 import java.util.Set;
 
