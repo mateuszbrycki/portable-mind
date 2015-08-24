@@ -5,7 +5,7 @@
         <button type="button" class="close add-card-category-form-close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Add new card category</h4>
       </div>
-      <form method="PUT" id="add-card-category-form" action="${pageContext.request.contextPath}/cardCategory/add" class="form-horizontal"  enctype="multipart/form-data">
+      <form method="PUT" id="add-card-category-form" action="${pageContext.request.contextPath}/cardCategory" class="form-horizontal"  enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <label class="control-label col-sm-3" for="cardCategoryName">Name: </label>

@@ -33,7 +33,7 @@ public class BoardController {
     CardCategoryService cardCategoryService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String mainAction(ModelMap model) {
+    public String getBoard(ModelMap model) {
         Integer userId = UserUtilities.getLoggedUserId();
 
         /*List<Card> cards = cardService.findAllUserCards(userId);

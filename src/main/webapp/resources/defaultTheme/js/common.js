@@ -207,7 +207,7 @@ function reloadBoard() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         type: "GET",
-        url:  ctx + "/project/all",
+        url:  ctx + "/projects",
         beforeSend: function(xhr) {
             var csrfData = getCSRFRequestHeader();
             xhr.setRequestHeader(csrfData['header'], csrfData['token']);
@@ -224,7 +224,7 @@ function reloadCards(projectId) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         type: "GET",
-        url:  ctx + "/card/project/" + projectId,
+        url:  ctx + "/project/" + projectId + "/cards",
         beforeSend: function(xhr) {
             var csrfData = getCSRFRequestHeader();
             xhr.setRequestHeader(csrfData['header'], csrfData['token']);
@@ -241,7 +241,7 @@ function reloadCardCategories() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         type: "GET",
-        url:  ctx + "/cardCategory/categories",
+        url:  ctx + "/cardCategories",
         beforeSend: function(xhr) {
             var csrfData = getCSRFRequestHeader();
             xhr.setRequestHeader(csrfData['header'], csrfData['token']);

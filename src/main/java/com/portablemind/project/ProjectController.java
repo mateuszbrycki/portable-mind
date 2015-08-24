@@ -38,7 +38,7 @@ public class ProjectController {
     private String viewPath = "controller/project/";
 
 
-    @RequestMapping(value="/add", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public @ResponseBody ResponseEntity<Response> addProject(@RequestBody Project project) {
         project.setOwner(UserUtilities.getLoggedUserId());
 
@@ -47,15 +47,8 @@ public class ProjectController {
         return new ResponseEntity<Response>(new Response("message", "New project successfully added!"), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/all", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<List<Project>> getUserProjects() {
-        List<Project> projects = projectService.findAllUserProjects(UserUtilities.getLoggedUserId());
-
-        return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
-    }
-
     @RequestMapping(value="/{projectId}", method = RequestMethod.GET)
-    public String listUserProjects(@PathVariable("projectId") Integer projectId, ModelMap model) {
+    public String getProject(@PathVariable("projectId") Integer projectId, ModelMap model) {
         Integer userId = UserUtilities.getLoggedUserId();
 
         Project project = projectService.findById(projectId);
@@ -76,7 +69,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value="/{projectId}", method = RequestMethod.DELETE)
-    public @ResponseBody ResponseEntity<Response> deleteAction(@PathVariable("projectId") Integer projectId) {
+    public @ResponseBody ResponseEntity<Response> deleteProject(@PathVariable("projectId") Integer projectId) {
 
         if(projectService.findById(projectId).getOwner() != UserUtilities.getLoggedUserId()) {
             return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
@@ -86,6 +79,17 @@ public class ProjectController {
         projectService.deleteProjectById(projectId);
 
         return new ResponseEntity<Response>(new Response("message", "Project deleted!"), HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value="/{projectId}/cards", method = RequestMethod.GET)
+    public @ResponseBody ResponseEntity<List<Card>> getAllUserProjectCards(@PathVariable("projectId") Integer projectId) {
+
+        Integer userId = UserUtilities.getLoggedUserId();
+
+        List<Card> cards = cardService.findAllUserProjectCards(userId, projectId);
+
+        return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }
 
 }

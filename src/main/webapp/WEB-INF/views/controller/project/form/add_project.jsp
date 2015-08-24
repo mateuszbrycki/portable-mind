@@ -6,7 +6,7 @@
         <h4 class="modal-title">Add new project</h4>
       </div>
       <div class="modal-body">
-        <form method="POST" id="add-project-form" action="${pageContext.request.contextPath}/project/add" class="form-horizontal">
+        <form method="PUT" id="add-project-form" action="${pageContext.request.contextPath}/project" class="form-horizontal">
 
           <div class="form-group">
             <label class="control-label col-sm-3" for="projectName">Name: </label>

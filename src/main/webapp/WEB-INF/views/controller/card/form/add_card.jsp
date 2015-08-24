@@ -6,7 +6,7 @@
                 <button type="button" class="close add-card-form-close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="add-card-modal-title">Add new card</h4>
             </div>
-            <form method="PUT" id="add-card-form" action="${pageContext.request.contextPath}/card/add" class="form-horizontal" >
+            <form method="PUT" id="add-card-form" action="${pageContext.request.contextPath}/card" class="form-horizontal" >
                 <input type="hidden" name="id" value="" />
                 <div class="modal-body">
                     <div class="form-group">

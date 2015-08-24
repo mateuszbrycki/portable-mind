@@ -31,7 +31,7 @@ public class CardController {
     @Autowired
     CardCategoryService cardCategoryService;
 
-    @RequestMapping(value="/add", method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public @ResponseBody ResponseEntity<Response> addCard(@RequestBody CardDTO cardDTO) {
 
         Card card = new Card();
@@ -53,27 +53,6 @@ public class CardController {
 
         return new ResponseEntity<Response>(new Response("message", "Card successfully added."), HttpStatus.OK);
     }
-    
-    @RequestMapping(value="/all", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<List<Card>> getAllUserCards() {
-
-        Integer userId = UserUtilities.getLoggedUserId();
-
-        List<Card> cards = cardService.findAllUserCards(userId);
-
-        return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
-    }
-
-    @RequestMapping(value="/project/{projectId}", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<List<Card>> getAllUserProjectCards(@PathVariable("projectId") Integer projectId) {
-
-        Integer userId = UserUtilities.getLoggedUserId();
-
-        List<Card> cards = cardService.findAllUserProjectCards(userId, projectId);
-
-        return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
-    }
-
 
     @RequestMapping(value="/{cardId}", method = RequestMethod.DELETE)
     public @ResponseBody ResponseEntity<Response> deleteCard(@PathVariable("cardId") Integer id) {
@@ -87,7 +66,7 @@ public class CardController {
         return new ResponseEntity<Response>(new Response("message", "Card deleted!"), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/edit/{id}", method = RequestMethod.POST)
+    @RequestMapping(value="/{id}", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<Object> editCard(@PathVariable("id") Integer id) {
 
         if(cardService.getCardOwner(id) != UserUtilities.getLoggedUserId()) {

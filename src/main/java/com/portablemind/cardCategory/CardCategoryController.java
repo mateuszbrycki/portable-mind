@@ -22,7 +22,7 @@ public class CardCategoryController {
     @Autowired
     CardCategoryService service;
 
-    @RequestMapping(value="/add", method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public @ResponseBody ResponseEntity<Response> addCardCategory(@RequestBody CardCategoryDTO cardCategory) {
 
         System.out.println(cardCategory.getFile().getName());
@@ -32,13 +32,4 @@ public class CardCategoryController {
 
         return new ResponseEntity<Response>(new Response("message", "New card category successfully added!"), HttpStatus.OK);
     }
-
-    @RequestMapping(value="/all", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<List<CardCategory>> getAvailableCategories() {
-
-        List<CardCategory> categories =  service.findAllUserCardCategories(UserUtilities.getLoggedUserId());
-
-        return new ResponseEntity<List<CardCategory>>(categories, HttpStatus.OK);
-    }
-
 }
