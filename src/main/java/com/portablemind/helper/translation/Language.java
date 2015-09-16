@@ -1,6 +1,6 @@
 package com.portablemind.helper.translation;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 

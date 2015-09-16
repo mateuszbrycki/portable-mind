@@ -1,10 +1,10 @@
 package com.portablemind.card;
 
-import com.portablemind.cardCategory.CardCategory;
+import com.portablemind.cardcategory.CardCategory;
 import com.portablemind.project.Project;
-import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Mateusz Brycki on 28/04/2015.

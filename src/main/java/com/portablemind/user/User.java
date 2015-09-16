@@ -1,7 +1,7 @@
 package com.portablemind.user;
 
 import com.portablemind.userrole.UserRole;
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 

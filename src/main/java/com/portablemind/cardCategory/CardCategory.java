@@ -1,6 +1,6 @@
-package com.portablemind.cardCategory;
+package com.portablemind.cardcategory;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 

@@ -1,7 +1,6 @@
 package com.portablemind.project;
 
-import com.sun.istack.internal.NotNull;
-
+import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
 /**
