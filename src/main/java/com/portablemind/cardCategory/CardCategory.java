@@ -1,4 +1,4 @@
-package com.portablemind.cardcategory;
+package com.portablemind.cardCategory;
 
 import javax.validation.constraints.NotNull;
 

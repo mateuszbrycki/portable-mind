@@ -1,6 +1,6 @@
 package com.portablemind.card;
 
-import com.portablemind.cardcategory.CardCategory;
+import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.project.Project;
 
 import javax.persistence.*;
