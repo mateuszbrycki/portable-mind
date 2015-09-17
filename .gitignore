@@ -3,9 +3,9 @@ bin/
 target/
 target/*
 
-
+pom.xml
+src/main/resources/database.properties
 .classpath
-.gitignore~
 .project
 .springBeans
 .idea
