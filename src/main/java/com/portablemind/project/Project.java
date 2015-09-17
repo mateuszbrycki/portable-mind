@@ -7,21 +7,21 @@ import javax.persistence.*;
  * Created by Mateusz Brycki on 02/05/2015.
  */
 @Entity
-@Table(name="PROJECT")
+@Table(name="project")
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
-    @Column(name="FK_USER_ID")
+    @Column(name="fk_user_id")
     private Integer owner;
 
     @NotNull
-    @Column(name="NAME")
+    @Column(name="name")
     private String name;
 
-    @Column(name="DESCRIPTION")
+    @Column(name="description")
     private String description;
 
     public Project() {}

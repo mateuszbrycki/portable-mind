@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * Created by Mateusz Brycki on 28/04/2015.
  */
 @Entity
-@Table(name="CARD")
+@Table(name="card")
 public class Card {
 
     @Id
@@ -18,21 +18,21 @@ public class Card {
     private int id;
 
     @NotNull
-    @Column(name="FK_USER_ID")
+    @Column(name="fk_user_id")
     private Integer owner;
 
     @OneToOne
     @NotNull
-    @JoinColumn(name = "FK_CATEGORY_ID")
+    @JoinColumn(name = "fk_category_id")
     private CardCategory category;
 
     @OneToOne
     @NotNull
-    @JoinColumn(name="FK_PROJECT_ID")
+    @JoinColumn(name="fk_project_id")
     private Project project;
 
     @NotNull
-    @Column(name="CARD_DESCRIPTION")
+    @Column(name="card_description")
     private String description;
 
     public Card() {}

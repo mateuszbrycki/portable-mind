@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by Mateusz Brycki on 12/05/2015.
  */
 @Entity
-@Table(name="USER")
+@Table(name="user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,23 +17,23 @@ public class User {
 
     @NotNull
     @OneToOne
-    @JoinColumn(name="FK_USER_ROLE")
+    @JoinColumn(name="fk_user_role")
     private UserRole role;
 
     @NotNull
-    @Column(name="MAIL")
+    @Column(name="mail")
     private String mail;
 
     @NotNull
-    @Column(name="PASSWORD")
+    @Column(name="password")
     private String password;
 
     @NotNull
-    @Column(name="IS_PUBLIC")
+    @Column(name="is_public")
     private boolean isPublic;
 
     @NotNull
-    @Column(name="IS_ENABLED")
+    @Column(name="is_enabled")
     private boolean isEnabled;
 
     public static Boolean DEFAULT_IS_PUBLIC = true;

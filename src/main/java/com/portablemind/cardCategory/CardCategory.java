@@ -8,18 +8,18 @@ import javax.persistence.*;
  * Created by Mateusz Brycki on 03/05/2015.
  */
 @Entity
-@Table(name="CARD_CATEGORY")
+@Table(name="card_category")
 public class CardCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
-    @Column(name="FK_USER_ID")
+    @Column(name="fk_user_id")
     private Integer owner;
 
     @NotNull
-    @Column(name="CATEGORY_NAME")
+    @Column(name="category_name")
     private String name;
 
     public CardCategory() {}

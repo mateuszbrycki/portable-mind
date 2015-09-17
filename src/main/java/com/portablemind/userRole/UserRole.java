@@ -8,14 +8,14 @@ import javax.persistence.*;
  * Created by Mateusz Brycki on 12/05/2015.
  */
 @Entity
-@Table(name="USER_ROLE")
+@Table(name="user_role")
 public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
-    @Column(name="ROLE")
+    @Column(name="role")
     private String role;
 
     public int getId() {
