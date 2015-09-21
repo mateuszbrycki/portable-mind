@@ -15,10 +15,6 @@ public class CardCategory {
     private int id;
 
     @NotNull
-    @Column(name="fk_user_id")
-    private Integer owner;
-
-    @NotNull
     @Column(name="category_name")
     private String name;
 
@@ -26,7 +22,6 @@ public class CardCategory {
 
     public CardCategory(Integer id, String name, Integer owner) {
         this.id = id;
-        this.owner = owner;
         this.name = name;
     }
 
@@ -36,14 +31,6 @@ public class CardCategory {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Integer getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Integer owner) {
-        this.owner = owner;
     }
 
     public String getName() {

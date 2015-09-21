@@ -63,7 +63,6 @@ public class CardCategoryDaoImpl extends AbstractDao implements CardCategoryDao 
         CardCategory cardCategory = new CardCategory();
         cardCategory.setId((Integer)cardCategoryObject[0]);
         cardCategory.setName((String) cardCategoryObject[1]);
-        cardCategory.setOwner((Integer) cardCategoryObject[2]);
 
         return cardCategory;
     }

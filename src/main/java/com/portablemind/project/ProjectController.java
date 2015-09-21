@@ -61,7 +61,7 @@ public class ProjectController {
         List<Project> projects = projectService.findAllUserProjects(userId);
         model.addAttribute("projects", projects);
 
-        List<CardCategory> cardCategories = cardCategoryService.findAllUserCardCategories(userId);
+        List<CardCategory> cardCategories = cardCategoryService.findAllCardCategories();
         model.addAttribute("cardCategories", cardCategories);
 
         return this.viewPath + "list";

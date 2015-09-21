@@ -27,7 +27,7 @@ public class CardCategoriesController {
     public @ResponseBody
     ResponseEntity<List<CardCategory>> getAvailableCategories() {
 
-        List<CardCategory> categories =  service.findAllUserCardCategories(UserUtilities.getLoggedUserId());
+        List<CardCategory> categories =  service.findAllCardCategories();
 
         return new ResponseEntity<List<CardCategory>>(categories, HttpStatus.OK);
     }
