@@ -110,13 +110,13 @@ function refreshCardList(data) {
             var panelHeading = document.createElement('div');
             panelHeading.className = 'panel-heading';
 
-            var panelHeadingH = document.createElement('h4');
-            panelHeadingH.className = 'panel-title';
+            var headerString = data[i].category.name;
+            if(data[i].name) {
+                headerString = data[i].name + " - " + data[i].category.name;
+            }
+            var aText = document.createTextNode(headerString);
 
-            var aText = document.createTextNode(data[i].category.name);
-
-            panelHeadingH.appendChild(aText);
-            panelHeading.appendChild(panelHeadingH);
+            panelHeading.appendChild(aText);
             panelDefault.appendChild(panelHeading);
 
             var panelCollapse = document.createElement('div');
@@ -157,7 +157,7 @@ function refreshCardList(data) {
 
             var deleteGlyphicon = document.createElement('span');
             deleteGlyphicon.className = 'glyphicon glyphicon-remove';
-            var deleteText = document.createTextNode('Delete');
+            var deleteText = document.createTextNode(' Delete');
 
             deleteButton.appendChild(deleteGlyphicon);
             deleteButton.appendChild(deleteText);

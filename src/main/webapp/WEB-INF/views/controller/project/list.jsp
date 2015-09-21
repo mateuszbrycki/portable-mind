@@ -11,6 +11,9 @@
       <c:forEach items="${cards}" var="card">
         <div class="panel panel-default">
           <div class="panel-heading">
+            <c:if test="${not empty card.name}">
+              ${card.name} -
+            </c:if>
             ${card.category.name}
           </div>
           <div id="collapse${card.id}" class="panel-collapse collapse in" aria-expanded="true">

@@ -38,6 +38,7 @@ public class CardController {
 
         card.setProject(projectService.findById(cardDTO.getProject()));
         card.setCategory(cardCategoryService.findById(cardDTO.getCategory()));
+        card.setName(cardDTO.getName());
         card.setDescription(cardDTO.getDescription());
 
         card.setOwner(UserUtilities.getLoggedUserId());

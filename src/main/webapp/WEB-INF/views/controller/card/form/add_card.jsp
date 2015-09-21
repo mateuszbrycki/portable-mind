@@ -32,6 +32,13 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label col-sm-3" for="cardName">Name:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="name"  class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="control-label col-sm-3" for="cardDescription">Description:</label>
                         <div class="col-sm-5">
                             <textarea type="text" name="description" class="form-control" rows="6"></textarea>

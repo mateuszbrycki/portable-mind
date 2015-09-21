@@ -113,7 +113,8 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
         card.setOwner((Integer) cardObject[1]);
         card.setCategory(cardCategoryService.findById((Integer) cardObject[2]));
         card.setProject(projectService.findById((Integer) cardObject[3]));
-        card.setDescription((String) cardObject[6]);
+        card.setName((String) cardObject[4]);
+        card.setDescription((String) cardObject[7]);
 
         return card;
     }

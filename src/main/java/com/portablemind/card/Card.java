@@ -31,6 +31,9 @@ public class Card {
     @JoinColumn(name="fk_project_id")
     private Project project;
 
+    @Column(name="card_name")
+    private String name;
+
     @NotNull
     @Column(name="card_description")
     private String description;
@@ -84,4 +87,8 @@ public class Card {
     public void setProject(Project type) {
         this.project = type;
     }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 }

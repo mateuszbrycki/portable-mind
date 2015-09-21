@@ -1,0 +1,1 @@
+ALTER TABLE card ADD card_name TEXT AFTER fk_project_id;
