@@ -19,3 +19,9 @@
     float: left;
     margin: 0 2px;
 }
+
+.category-icon {
+    width: 30px;
+    height: 30px;
+    padding-right: 5px;
+}

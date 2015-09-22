@@ -18,9 +18,12 @@ public class CardCategory {
     @Column(name="category_name")
     private String name;
 
+    @Column(name="category_icon")
+    private String icon;
+
     public CardCategory() {}
 
-    public CardCategory(Integer id, String name, Integer owner) {
+    public CardCategory(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -40,4 +43,8 @@ public class CardCategory {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getIcon() { return icon; }
+
+    public void setIcon(String icon) { this.icon = icon; }
 }

@@ -1,7 +1,10 @@
+<%@ page import="com.portablemind.helper.image.ImageHelper" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <body>
+
+  <c:set var="cardCategoryImagePath" scope="session" value="<%=ImageHelper.getCardCategoryImagePath()%>"/>
   <h1>${project.name}</h1>
 
   <script>var projectId = "${project.id}"</script>
@@ -11,6 +14,10 @@
       <c:forEach items="${cards}" var="card">
         <div class="panel panel-default">
           <div class="panel-heading">
+            <c:if test="${not empty card.category.icon}">
+              <img src="<c:url value="${cardCategoryImagePath}/${card.category.icon}" />" alt="${card.category.name}" class="category-icon"/>
+            </c:if>
+
             <c:if test="${not empty card.name}">
               ${card.name} -
             </c:if>
