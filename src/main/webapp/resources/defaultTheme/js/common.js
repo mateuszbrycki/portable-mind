@@ -12,6 +12,11 @@ function refreshBoardTable(data) {
     var newPanelGroup = document.createElement('div');
     newPanelGroup.id = 'panel-group';
 
+    if(data.length == 0) {
+        var alertDiv = getEmptyAlert('projects');
+        newPanelGroup.appendChild(alertDiv);
+    }
+
     for(var i = 0; i < data.length; i++){
         var panelDefault = null;
         if(data[i]){
@@ -96,10 +101,14 @@ function refreshCardList(data) {
     if (!$('#card-list').length) {
        return;
     }
-
     var oldPanelGroup = document.getElementById('panel-group');
     var newPanelGroup = document.createElement('div');
     newPanelGroup.id = 'panel-group';
+
+    if(data.length == 0) {
+        var alertDiv = getEmptyAlert('cards');
+        newPanelGroup.appendChild(alertDiv);
+    }
 
     for(var i = 0; i < data.length; i++){
         var panelDefault = null;
@@ -251,6 +260,16 @@ function reloadCardCategories() {
             console.log("Request failed.");
         }
     });
+}
+
+function getEmptyAlert(element) {
+    var alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-info';
+    alertDiv.setAttribute('role', 'alert');
+
+    alertDiv.appendChild(document.createTextNode("You don't have any " + element + "."));
+
+    return alertDiv;
 }
 
 function refreshForm(form) {
