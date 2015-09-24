@@ -1,5 +1,9 @@
+<%@ page import="com.portablemind.user.UserUtilities" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="hasUserProjects" scope="session" value="<%=UserUtilities.hasUserProjects()%>"/>
+
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -12,7 +16,7 @@
           Add project
         </a>
       </li>
-      <li type="button" data-dismiss="modal" style="margin: 2px;">
+      <li type="button" data-dismiss="modal" style="margin: 2px;" <c:if test="${not hasUserProjects}">class="disabled"</c:if> id="show-add-card-form-button">
         <a href="#" id="show-add-card-form">
           <span class="glyphicon glyphicon-plus"></span>
           Add card

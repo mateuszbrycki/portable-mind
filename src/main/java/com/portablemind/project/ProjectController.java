@@ -6,10 +6,13 @@ import com.portablemind.card.service.CardService;
 import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.cardCategory.service.CardCategoryService;
 import com.portablemind.project.service.ProjectService;
+import com.portablemind.user.UserSecurity;
 import com.portablemind.user.UserUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -40,9 +43,14 @@ public class ProjectController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public @ResponseBody ResponseEntity<Response> addProject(@RequestBody Project project) {
+
         project.setOwner(UserUtilities.getLoggedUserId());
 
         projectService.saveProject(project);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
+        currentUser.setHasUserProjects(true);
 
         return new ResponseEntity<Response>(new Response("message", "New project successfully added!"), HttpStatus.OK);
     }
@@ -77,6 +85,10 @@ public class ProjectController {
         }
 
         projectService.deleteProjectById(projectId);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
+        currentUser.setHasUserProjects(false);
 
         return new ResponseEntity<Response>(new Response("message", "Project deleted!"), HttpStatus.OK);
     }

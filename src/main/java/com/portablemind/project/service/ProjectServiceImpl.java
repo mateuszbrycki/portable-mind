@@ -37,4 +37,6 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> findAllUserProjects(Integer id) {
         return dao.findAllUserProjects(id);
     }
+
+    public Boolean hasUserProjects(Integer id) { return dao.hasUserProjects(id); }
 }

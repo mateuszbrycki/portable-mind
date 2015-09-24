@@ -20,4 +20,5 @@ public interface ProjectService {
 
     List<Project> findAllUserProjects(Integer id);
 
+    Boolean hasUserProjects(Integer id);
 }

@@ -15,6 +15,10 @@ function refreshBoardTable(data) {
     if(data.length == 0) {
         var alertDiv = getEmptyAlert('projects');
         newPanelGroup.appendChild(alertDiv);
+
+        $("#show-add-card-form-button").addClass('disabled');
+    } else {
+        $("#show-add-card-form-button").removeClass('disabled');
     }
 
     for(var i = 0; i < data.length; i++){
@@ -308,7 +312,9 @@ function getCSRFRequestHeader() {
 $(document).ready(function() {
 
     $(document).on('click', '#show-add-card-form', function() {
-        showAddCardForm();
+        if(!$("#show-add-card-form-button").hasClass("disabled")) {
+            showAddCardForm();
+        }
     });
 
     $(document).on('click', '#show-add-project-form', function() {

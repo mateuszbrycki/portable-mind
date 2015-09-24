@@ -20,4 +20,15 @@ public class UserUtilities {
         return currentUser.getId();
     }
 
+    public static Boolean hasUserProjects() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if(auth.getPrincipal() instanceof String) {
+            return false;
+        }
+        UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
+
+        return currentUser.hasUserProjects();
+    }
+
 }

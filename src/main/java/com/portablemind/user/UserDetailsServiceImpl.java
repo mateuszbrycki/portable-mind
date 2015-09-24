@@ -1,5 +1,6 @@
 package com.portablemind.user;
 
+import com.portablemind.project.service.ProjectService;
 import com.portablemind.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +23,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ProjectService projectService;
+
     @Override
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 
@@ -32,10 +36,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
             authorities.add(new SimpleGrantedAuthority(user.getRole().getRole()));
 
+            Integer userId = user.getId();
+
             UserSecurity securityUser = new
-                    UserSecurity(user.getId(), user.getMail(), user.getPassword(), user.isEnabled(),
+                    UserSecurity(userId, user.getMail(), user.getPassword(), user.isEnabled(),
                     true, true, true, authorities
             );
+
+            securityUser.setHasUserProjects(projectService.hasUserProjects(userId));
 
             return securityUser;
 
