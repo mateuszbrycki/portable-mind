@@ -215,6 +215,32 @@ function refreshCardCategoriesSelect(data) {
     SyntaxHighlighter.all();
 }
 
+function refreshProjectSelect(data) {
+
+    var oldSelectDiv = document.getElementById('add-card-form-project');
+    var newSelectDiv = document.createElement('div');
+    newSelectDiv.className = 'col-sm-5';
+    newSelectDiv.id = 'add-card-form-project';
+
+    var newSelect = document.createElement('select');
+    newSelect.className = 'form-control';
+    newSelect.name = 'project';
+
+    for(var i = 0; i < data.length; i++){
+        var option = document.createElement('option');
+
+        if(data[i]) {
+            option.value = data[i].id;
+            option.text = data[i].name;
+        }
+
+        newSelect.appendChild(option);
+    }
+    newSelectDiv.appendChild(newSelect);
+    oldSelectDiv.parentNode.replaceChild(newSelectDiv, oldSelectDiv);
+    SyntaxHighlighter.all();
+}
+
 function reloadCardCategories() {
     $.ajax({
         contentType: "application/json; charset=utf-8",
@@ -368,6 +394,7 @@ $(document).ready(function() {
                     xhr.setRequestHeader(csrfData['header'], csrfData['token']);
                 },
                 success: function(callback) {
+                    refreshProjectSelect(callback);
                     refreshBoardTable(callback);
                 },
                 error: function (callback) {

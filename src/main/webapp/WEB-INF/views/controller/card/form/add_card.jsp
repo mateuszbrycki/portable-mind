@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="project">Project: </label>
-                        <div class="col-sm-5">
+                        <div id="add-card-form-project" class="col-sm-5">
                             <select name="project" class="form-control">
                                 <c:forEach items="${projects}" var="project">
                                     <option value="${project.id}" <c:if test="${requestScope.projectId == project.id}">selected</c:if> >${project.name}</option>
