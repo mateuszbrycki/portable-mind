@@ -1,5 +1,7 @@
 package com.portablemind.cardCategory;
 
+import com.portablemind.helper.image.ImageHelper;
+
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
@@ -44,7 +46,9 @@ public class CardCategory {
         this.name = name;
     }
 
-    public String getIcon() { return icon; }
+    public String getIcon() {
+        return ImageHelper.getCardCategoryImagePath() + "/" + icon;
+    }
 
     public void setIcon(String icon) { this.icon = icon; }
 }

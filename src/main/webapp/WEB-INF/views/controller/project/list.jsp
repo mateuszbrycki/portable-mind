@@ -18,13 +18,14 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <c:if test="${not empty card.category.icon}">
-                  <img src="<c:url value="${cardCategoryImagePath}/${card.category.icon}" />" alt="${card.category.name}" class="category-icon"/>
+                  <img src="<c:url value="${card.category.icon}" />" alt="${card.category.name}" class="category-icon"/>
                 </c:if>
-
-                <c:if test="${not empty card.name}">
-                  ${card.name} -
-                </c:if>
+                <p class="card-title" style="margin-left: 3px;">
+                  <c:if test="${not empty card.name}">
+                    ${card.name} -
+                  </c:if>
                   ${card.category.name}
+                </p>
               </div>
               <div id="collapse${card.id}" class="panel-collapse collapse in" aria-expanded="true">
                 <div class="panel-body">

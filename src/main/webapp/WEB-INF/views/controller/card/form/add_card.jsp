@@ -7,19 +7,24 @@
                 <h4 class="modal-title" id="add-card-modal-title">Add new card</h4>
             </div>
             <form method="PUT" id="add-card-form" action="${pageContext.request.contextPath}/card" class="form-horizontal" >
-                <input type="hidden" name="id" value="" />
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="project">Project: </label>
-                        <div id="add-card-form-project" class="col-sm-5">
-                            <select name="project" class="form-control">
-                                <c:forEach items="${projects}" var="project">
-                                    <option value="${project.id}" <c:if test="${requestScope.projectId == project.id}">selected</c:if> >${project.name}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-
+                    <c:choose>
+                        <c:when test="${not empty requestScope.projectId }">
+                            <input type="hidden" name="project" value="${requestScope.projectId}" />
+                        </c:when>
+                        <c:otherwise>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="project">Project: </label>
+                                <div id="add-card-form-project" class="col-sm-5">
+                                    <select name="project" class="form-control">
+                                        <c:forEach items="${projects}" var="project">
+                                            <option value="${project.id}">${project.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="cardCategory">Category:</label>
                         <div id="add-card-form-category" class="col-sm-5">

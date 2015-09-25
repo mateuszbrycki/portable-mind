@@ -123,13 +123,22 @@ function refreshCardList(data) {
             var panelHeading = document.createElement('div');
             panelHeading.className = 'panel-heading';
 
+            var iconElement = document.createElement('img');
+            iconElement.setAttribute('src', data[i].category.icon);
+            iconElement.className = 'category-icon';
+
             var headerString = data[i].category.name;
             if(data[i].name) {
                 headerString = data[i].name + " - " + data[i].category.name;
             }
+
+            var pElement = document.createElement('p');
+            pElement.className = 'card-title';
             var aText = document.createTextNode(headerString);
 
-            panelHeading.appendChild(aText);
+            pElement.appendChild(aText);
+            panelHeading.appendChild(iconElement);
+            panelHeading.appendChild(pElement);
             panelDefault.appendChild(panelHeading);
 
             var panelCollapse = document.createElement('div');
@@ -269,7 +278,9 @@ function getEmptyAlert(element) {
 }
 
 function refreshForm(form) {
-    form.find("input[type=hidden]").val("");
+    //przy dodwaniu nowej karty z poziomu projektu usuwane było id projektu z pola hidden, jeżeli będzie powodowało
+    //problemy czyszczenie należy rozbić na różne metody lub ifować
+    //form.find("input[type=hidden]").val("");
     form.trigger("reset");
     form.validate().resetForm();
 }
