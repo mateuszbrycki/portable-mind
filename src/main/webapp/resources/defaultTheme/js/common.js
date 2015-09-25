@@ -467,6 +467,7 @@ $(document).ready(function() {
                     xhr.setRequestHeader(csrfData['header'], csrfData['token']);
                 },
                 success: function(callback) {
+                    refreshProjectSelect(callback);
                     refreshBoardTable(callback);
                 },
                 error: function (callback) {
