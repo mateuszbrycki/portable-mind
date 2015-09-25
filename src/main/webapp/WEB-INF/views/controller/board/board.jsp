@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <body>
+	<jsp:include page="../project/form/edit_project.jsp" />
 	<sec:authorize access="isAuthenticated()">
 		<div id="projects-list">
 			<div id="panel-group" id="accordion">
@@ -22,7 +23,7 @@
 							</div>
 							<div class="panel-footer clearfix">
 								<div class="footer-buttons">
-									<button type="button" class="edit-project btn btn-primary"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+									<button type="button" class="edit-project btn btn-primary" href="${pageContext.request.contextPath}/project/${project.id}/entity"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
 									<button type="button" class="delete-project btn btn-danger" href="${pageContext.request.contextPath}/project/${project.id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
 								</div>
 							</div>

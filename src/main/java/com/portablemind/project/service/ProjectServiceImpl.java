@@ -39,4 +39,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Boolean hasUserProjects(Integer id) { return dao.hasUserProjects(id); }
+
+    public Integer getProjectOwner(Integer id) { return dao.getProjectOwner(id); }
 }

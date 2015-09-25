@@ -9,7 +9,7 @@
   <h1>${project.name}</h1>
 
   <script>var projectId = "${project.id}"</script>
-
+  <jsp:include page="../card/form/edit_card.jsp" />
   <div id="card-list">
     <div id="panel-group" id="accordion">
       <c:choose>
@@ -34,7 +34,7 @@
               </div>
               <div class="panel-footer clearfix">
                 <div class="footer-buttons">
-                  <button type="button" class="edit-card btn btn-primary"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+                  <button type="button" class="edit-card btn btn-primary" href="${pageContext.request.contextPath}/card/${card.id}"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
                   <button type="button" class="delete-card btn btn-danger" href="${pageContext.request.contextPath}/card/${card.id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
                 </div>
               </div>

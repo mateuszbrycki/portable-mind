@@ -42,15 +42,27 @@ public class ProjectController {
 
 
     @RequestMapping(method = RequestMethod.PUT)
-    public @ResponseBody ResponseEntity<List<Project>> addProject(@RequestBody Project project) {
+    public @ResponseBody ResponseEntity<List<Project>> addProject(@RequestBody ProjectDTO projectDTO) {
         Integer userId = UserUtilities.getLoggedUserId();
+
+        Project project = new Project();
+
+        project.setName(projectDTO.getName());
+        project.setDescription(projectDTO.getDescription());
         project.setOwner(userId);
 
-        projectService.saveProject(project);
+        Integer id = projectDTO.getId();
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
-        currentUser.setHasUserProjects(true);
+        if(id != null) {
+            project.setId(id);
+            projectService.updateProject(project);
+        } else {
+            projectService.saveProject(project);
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
+            currentUser.setHasUserProjects(true);
+        }
 
         List<Project> projects = projectService.findAllUserProjects(userId);
 
@@ -80,8 +92,8 @@ public class ProjectController {
 
     @RequestMapping(value="/{projectId}", method = RequestMethod.DELETE)
     public @ResponseBody ResponseEntity<List<Project>> deleteProject(@PathVariable("projectId") Integer projectId) {
-
-        if(projectService.findById(projectId).getOwner() != UserUtilities.getLoggedUserId()) {
+        Integer userId = UserUtilities.getLoggedUserId();
+        if(projectService.findById(projectId).getOwner() != userId) {
             //return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
             //TODO mbrycki chujowo, przemyśleć
             return null;
@@ -91,13 +103,27 @@ public class ProjectController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
-        currentUser.setHasUserProjects(false);
+        currentUser.setHasUserProjects(projectService.hasUserProjects(userId));
 
-        List<Project> projects = projectService.findAllUserProjects(UserUtilities.getLoggedUserId());
+        List<Project> projects = projectService.findAllUserProjects(userId);
 
         return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
 
     }
+    
+    @RequestMapping(value="/{projectId}/entity", method = RequestMethod.GET)
+    public ResponseEntity<Object> getProjectEntity(@PathVariable("projectId") Integer projectId) {
+
+        if(projectService.getProjectOwner(projectId) != UserUtilities.getLoggedUserId()) {
+            return new ResponseEntity<Object>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
+        }
+        
+        Project project = projectService.findById(projectId);
+
+        return new ResponseEntity<Object>(project, HttpStatus.OK);
+        
+    }
+    
 
 
     @RequestMapping(value="/{projectId}/cards", method = RequestMethod.GET)

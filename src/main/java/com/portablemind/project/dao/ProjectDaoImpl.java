@@ -68,6 +68,13 @@ public class ProjectDaoImpl extends AbstractDao implements ProjectDao {
         query.executeUpdate();
     }
 
+    public Integer getProjectOwner(Integer id) {
+        Query query = getSession().createSQLQuery("SELECT p.fk_user_id FROM project p WHERE p.id = :id LIMIT 1");
+        query.setString("id", id.toString());
+
+        return (Integer)query.uniqueResult();
+    }
+
     private Project mapProjectObject(Object[] projectObject) {
 
         if(projectObject == null) {

@@ -37,14 +37,6 @@ public class ProjectDTO {
         this.description = description;
     }
 
-    /*public MultipartFile getFile() {
-        return file;
-    }
-
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }*/
-
     public Integer getOwner() {
         return owner;
     }

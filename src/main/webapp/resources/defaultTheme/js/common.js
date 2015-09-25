@@ -66,6 +66,7 @@ function refreshBoardTable(data) {
             var editButton = document.createElement('button');
             editButton.className = 'edit-project btn btn-primary';
             editButton.type = 'button';
+            editButton.setAttribute('href', ctx + '/project/' + data[i].id + '/entity');
 
             var editGlyphicon = document.createElement('span');
             editGlyphicon.className = 'glyphicon glyphicon-edit';
@@ -164,6 +165,7 @@ function refreshCardList(data) {
             var editButton = document.createElement('button');
             editButton.className = 'edit-card btn btn-primary';
             editButton.type = 'button';
+            editButton.setAttribute('href', ctx + '/card/' + data[i].id);
 
             var editGlyphicon = document.createElement('span');
             editGlyphicon.className = 'glyphicon glyphicon-edit';
@@ -285,17 +287,35 @@ function refreshForm(form) {
     form.validate().resetForm();
 }
 
-function populateForm(data) {
-    var form = document.forms['add-card-form'];
+function populateEditCardForm(data) {
+    var form = document.forms['edit-card-form'];
     form.elements['id'].value = data['id'];
-    form.elements['type'].value = data['type']['id'];
+    form.elements['project'].value = data['project']['id'];
     form.elements['category'].value = data['category']['id'];
+    form.elements['name'].value = data['name'];
+    form.elements['description'].value = data['description'];
+}
+
+function populateEditProjectForm(data) {
+    var form = document.forms['edit-project-form'];
+    form.elements['id'].value = data['id'];
+    form.elements['name'].value = data['name'];
     form.elements['description'].value = data['description'];
 }
 
 function showAddCardForm() {
     $('#add-card-modal').modal({keyboard: true});
     $("#add-card-modal").modal('show');
+}
+
+function showEditCardForm() {
+    $('#edit-card-modal').modal({keyboard: true});
+    $("#edit-card-modal").modal('show');
+}
+
+function showEditProjectForm() {
+    $('#edit-project-modal').modal({keyboard: true});
+    $("#edit-project-modal").modal('show');
 }
 
 function showAddCardCategoryForm() {
@@ -310,6 +330,10 @@ function getCSRFRequestHeader() {
     result['header'] = $("meta[name='_csrf_header']").attr("content");
 
     return result;
+}
+
+function processCardForm(frm, e) {
+
 }
 
 $(document).ready(function() {
@@ -413,6 +437,45 @@ $(document).ready(function() {
                 }
             });
             refreshForm(frm);
+            $("#add-project-modal").modal('hide');
+        }
+    });
+
+    $(document).on('submit', '#edit-project-form', function(e) {
+        var frm = $('#edit-project-form');
+        e.preventDefault();
+
+        var data = {};
+
+        $.each(this, function(i, v){
+            var input = $(v);
+            data[input.attr("name")] = input.val();
+            delete data["undefined"];
+        });
+
+        data["id"] = parseInt(data["id"]);
+
+        if(frm.valid()) {
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: JSON.stringify(data),
+                beforeSend: function(xhr) {
+                    var csrfData = getCSRFRequestHeader();
+                    xhr.setRequestHeader(csrfData['header'], csrfData['token']);
+                },
+                success: function(callback) {
+                    refreshBoardTable(callback);
+                },
+                error: function (callback) {
+                    console.log("Request failed.");
+                }
+            });
+
+            refreshForm(frm);
+            $("#edit-project-modal").modal('hide');
         }
     });
 
@@ -451,6 +514,46 @@ $(document).ready(function() {
             });
 
             refreshForm(frm);
+            $("#add-card-modal").modal('hide');
+        }
+    });
+
+    $(document).on('submit', '#edit-card-form', function(e) {
+        var frm = $('#edit-card-form');
+        e.preventDefault();
+
+        var data = {};
+
+        $.each(this, function(i, v){
+            var input = $(v);
+            data[input.attr("name")] = input.val();
+            delete data["undefined"];
+        });
+
+        data["project"] = parseInt(data["project"]);
+        data["category"] = parseInt(data["category"]);
+
+        if(frm.valid()) {
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: JSON.stringify(data),
+                beforeSend: function(xhr) {
+                    var csrfData = getCSRFRequestHeader();
+                    xhr.setRequestHeader(csrfData['header'], csrfData['token']);
+                },
+                success: function(callback) {
+                    refreshCardList(callback);
+                },
+                error: function (callback) {
+                    console.log("Request failed.");
+                }
+            });
+
+            refreshForm(frm);
+            $("#edit-card-modal").modal('hide');
         }
     });
 
@@ -488,7 +591,8 @@ $(document).ready(function() {
                 xhr.setRequestHeader(csrfData['header'], csrfData['token']);
             },
             success: function(callback) {
-                refreshBoardTable(callback)
+                refreshProjectSelect(callback);
+                refreshBoardTable(callback);
             },
             error: function (callback) {
                 console.log("Request failed.");
@@ -501,17 +605,36 @@ $(document).ready(function() {
         $.ajax({
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            type: "POST",
+            type: "GET",
             url: ctx + $(this).attr('href'),
             beforeSend: function(xhr) {
                 var csrfData = getCSRFRequestHeader();
                 xhr.setRequestHeader(csrfData['header'], csrfData['token']);
             },
             success: function(callback) {
-                populateForm(callback);
-                $("#add-card-submit").val("Edit card");
-                $("#add-card-modal-title").text("Edit card");
-                showAddCardForm();
+                populateEditCardForm(callback);
+                showEditCardForm();
+            },
+            error: function() {
+                console.log("Request failed.");
+            }
+        });
+    });
+
+    $(document).on('click', '.edit-project', function(e) {
+        e.preventDefault();
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "GET",
+            url: ctx + $(this).attr('href'),
+            beforeSend: function(xhr) {
+                var csrfData = getCSRFRequestHeader();
+                xhr.setRequestHeader(csrfData['header'], csrfData['token']);
+            },
+            success: function(callback) {
+                populateEditProjectForm(callback);
+                showEditProjectForm();
             },
             error: function() {
                 console.log("Request failed.");
@@ -527,5 +650,15 @@ $(document).ready(function() {
     $(document).on('click', '.add-card-category-form-close', function() {
         refreshForm($('#add-card-category-form'));
         $("#add-card-category-modal").modal('hide');
+    });
+
+    $(document).on('click', '.edit-card-form-close', function() {
+        refreshForm($('#edit-card-form'));
+        $("#edit-card-modal").modal('hide');
+    });
+
+    $(document).on('click', '.edit-project-form-close', function() {
+        refreshForm($('#edit-project-form'));
+        $("#edit-project-modal").modal('hide');
     });
 });

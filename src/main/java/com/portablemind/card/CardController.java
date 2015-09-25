@@ -76,7 +76,7 @@ public class CardController {
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.POST)
+    @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<Object> editCard(@PathVariable("id") Integer id) {
 
         if(cardService.getCardOwner(id) != UserUtilities.getLoggedUserId()) {

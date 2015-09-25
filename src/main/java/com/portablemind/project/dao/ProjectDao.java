@@ -21,5 +21,7 @@ public interface ProjectDao {
     List<Project> findAllUserProjects(Integer id);
 
     Boolean hasUserProjects(Integer id);
+
+    Integer getProjectOwner(Integer id);
 }
 
