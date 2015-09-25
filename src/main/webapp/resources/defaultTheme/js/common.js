@@ -215,40 +215,6 @@ function refreshCardCategoriesSelect(data) {
     SyntaxHighlighter.all();
 }
 
-function reloadBoard() {
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        type: "GET",
-        url:  ctx + "/projects",
-        beforeSend: function(xhr) {
-            var csrfData = getCSRFRequestHeader();
-            xhr.setRequestHeader(csrfData['header'], csrfData['token']);
-        },
-        success : refreshBoardTable,
-        error : function(){
-            console.log("Request failed.");
-        }
-    });
-}
-
-function reloadCards(projectId) {
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        type: "GET",
-        url:  ctx + "/project/" + projectId + "/cards",
-        beforeSend: function(xhr) {
-            var csrfData = getCSRFRequestHeader();
-            xhr.setRequestHeader(csrfData['header'], csrfData['token']);
-        },
-        success : refreshCardList,
-        error : function(){
-            console.log("Request failed.");
-        }
-    });
-}
-
 function reloadCardCategories() {
     $.ajax({
         contentType: "application/json; charset=utf-8",
@@ -402,7 +368,7 @@ $(document).ready(function() {
                     xhr.setRequestHeader(csrfData['header'], csrfData['token']);
                 },
                 success: function(callback) {
-                    reloadBoard();
+                    refreshBoardTable(callback);
                 },
                 error: function (callback) {
                     console.log("Request failed.");
@@ -439,7 +405,7 @@ $(document).ready(function() {
                     xhr.setRequestHeader(csrfData['header'], csrfData['token']);
                 },
                 success: function(callback) {
-                    reloadCards(data["project"]);
+                    refreshCardList(callback);
                 },
                 error: function (callback) {
                     console.log("Request failed.");
@@ -462,8 +428,8 @@ $(document).ready(function() {
                 var csrfData = getCSRFRequestHeader();
                 xhr.setRequestHeader(csrfData['header'], csrfData['token']);
             },
-            success : function() {
-                reloadCards(projectId)
+            success : function(callback) {
+                refreshCardList(callback)
             },
             error : function (callback) {
                 console.log("Request failed.");
@@ -484,7 +450,7 @@ $(document).ready(function() {
                 xhr.setRequestHeader(csrfData['header'], csrfData['token']);
             },
             success: function(callback) {
-                reloadBoard();
+                refreshBoardTable(callback)
             },
             error: function (callback) {
                 console.log("Request failed.");

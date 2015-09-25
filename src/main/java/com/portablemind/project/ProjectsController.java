@@ -24,8 +24,7 @@ public class ProjectsController {
     ProjectService projectService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody
-    ResponseEntity<List<Project>> getUserProjects() {
+    public @ResponseBody ResponseEntity<List<Project>> getUserProjects() {
         List<Project> projects = projectService.findAllUserProjects(UserUtilities.getLoggedUserId());
 
         return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);

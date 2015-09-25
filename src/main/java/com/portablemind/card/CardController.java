@@ -32,16 +32,18 @@ public class CardController {
     CardCategoryService cardCategoryService;
 
     @RequestMapping(method = RequestMethod.PUT)
-    public @ResponseBody ResponseEntity<Response> addCard(@RequestBody CardDTO cardDTO) {
+    public @ResponseBody ResponseEntity<List<Card>> addCard(@RequestBody CardDTO cardDTO) {
+
+        Integer userId = UserUtilities.getLoggedUserId();
+        Integer projectId = cardDTO.getProject();
 
         Card card = new Card();
 
-        card.setProject(projectService.findById(cardDTO.getProject()));
+        card.setProject(projectService.findById(projectId));
         card.setCategory(cardCategoryService.findById(cardDTO.getCategory()));
         card.setName(cardDTO.getName());
         card.setDescription(cardDTO.getDescription());
-
-        card.setOwner(UserUtilities.getLoggedUserId());
+        card.setOwner(userId);
 
         Integer id = cardDTO.getId();
 
@@ -52,19 +54,26 @@ public class CardController {
             cardService.saveCard(card);
         }
 
-        return new ResponseEntity<Response>(new Response("message", "Card successfully added."), HttpStatus.OK);
+        List<Card> cards = cardService.findAllUserProjectCards(userId, projectId);
+
+        return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }
 
     @RequestMapping(value="/{cardId}", method = RequestMethod.DELETE)
-    public @ResponseBody ResponseEntity<Response> deleteCard(@PathVariable("cardId") Integer id) {
+    public @ResponseBody ResponseEntity<List<Card>> deleteCard(@PathVariable("cardId") Integer id) {
+        Integer userId = UserUtilities.getLoggedUserId();
 
-        if(cardService.getCardOwner(id) != UserUtilities.getLoggedUserId()) {
-            return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
+        if(cardService.getCardOwner(id) != userId) {
+            //return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
+            //TODO mbrycki chujowo, przemyśleć
+            return null;
         }
-
+        Integer projectId = cardService.findById(id).getProject().getId();
         cardService.deleteCardById(id);
 
-        return new ResponseEntity<Response>(new Response("message", "Card deleted!"), HttpStatus.OK);
+        List<Card> cards = cardService.findAllUserProjectCards(userId, projectId);
+
+        return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.POST)

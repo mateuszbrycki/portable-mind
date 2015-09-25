@@ -42,9 +42,9 @@ public class ProjectController {
 
 
     @RequestMapping(method = RequestMethod.PUT)
-    public @ResponseBody ResponseEntity<Response> addProject(@RequestBody Project project) {
-
-        project.setOwner(UserUtilities.getLoggedUserId());
+    public @ResponseBody ResponseEntity<List<Project>> addProject(@RequestBody Project project) {
+        Integer userId = UserUtilities.getLoggedUserId();
+        project.setOwner(userId);
 
         projectService.saveProject(project);
 
@@ -52,7 +52,9 @@ public class ProjectController {
         UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
         currentUser.setHasUserProjects(true);
 
-        return new ResponseEntity<Response>(new Response("message", "New project successfully added!"), HttpStatus.OK);
+        List<Project> projects = projectService.findAllUserProjects(userId);
+
+        return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
     }
 
     @RequestMapping(value="/{projectId}", method = RequestMethod.GET)
@@ -77,11 +79,12 @@ public class ProjectController {
     }
 
     @RequestMapping(value="/{projectId}", method = RequestMethod.DELETE)
-    public @ResponseBody ResponseEntity<Response> deleteProject(@PathVariable("projectId") Integer projectId) {
+    public @ResponseBody ResponseEntity<List<Project>> deleteProject(@PathVariable("projectId") Integer projectId) {
 
         if(projectService.findById(projectId).getOwner() != UserUtilities.getLoggedUserId()) {
-            return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
-
+            //return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
+            //TODO mbrycki chujowo, przemyśleć
+            return null;
         }
 
         projectService.deleteProjectById(projectId);
@@ -90,7 +93,10 @@ public class ProjectController {
         UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
         currentUser.setHasUserProjects(false);
 
-        return new ResponseEntity<Response>(new Response("message", "Project deleted!"), HttpStatus.OK);
+        List<Project> projects = projectService.findAllUserProjects(UserUtilities.getLoggedUserId());
+
+        return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
+
     }
 
 
