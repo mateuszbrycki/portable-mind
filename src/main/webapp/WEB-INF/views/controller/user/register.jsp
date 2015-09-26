@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page session="true"%>
 <html>
 <head>
@@ -16,14 +17,14 @@
   <div class="col-sm-5 col-md-6">
     <c:if test="${not empty error}">
     <div class="alert alert-danger" role="alert">
-      <span class="sr-only">Error:</span>
+      <span class="sr-only"><spring:message code="error" />:</span>
       ${error}
     </div>
   </c:if>
 
   <c:if test="${not empty success}">
     <div class="alert alert-success" role="alert">
-      <span class="sr-only">Success:</span>
+      <span class="sr-only"><spring:message code="success" />:</span>
       ${success}
     </div>
   </c:if>

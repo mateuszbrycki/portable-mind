@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page session="true"%>
 <html>
 <head>
@@ -8,7 +9,7 @@
 
     <c:if test="${not empty error}">
         <div class="alert alert-danger" role="alert">
-            <span class="sr-only">Error:</span>
+            <span class="sr-only"><spring:message code="error" />:</span>
                 ${error}
         </div>
     </c:if>

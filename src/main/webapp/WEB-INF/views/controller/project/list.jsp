@@ -2,6 +2,7 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <body>
 
@@ -34,8 +35,12 @@
               </div>
               <div class="panel-footer clearfix">
                 <div class="footer-buttons">
-                  <button type="button" class="edit-card btn btn-primary" href="${pageContext.request.contextPath}/card/${card.id}"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
-                  <button type="button" class="delete-card btn btn-danger" href="${pageContext.request.contextPath}/card/${card.id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                  <button type="button" class="edit-card btn btn-primary" href="${pageContext.request.contextPath}/card/${card.id}">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <spring:message code="button.edit" /></button>
+                  <button type="button" class="delete-card btn btn-danger" href="${pageContext.request.contextPath}/card/${card.id}">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <spring:message code="button.delete" /></button>
                 </div>
               </div>
             </div>
@@ -43,7 +48,7 @@
         </c:when>
         <c:otherwise>
           <div class="alert alert-info" role="alert">
-            You don't have any cards.
+            <spring:message code="message.card.list.empty" />
           </div>
         </c:otherwise>
       </c:choose>

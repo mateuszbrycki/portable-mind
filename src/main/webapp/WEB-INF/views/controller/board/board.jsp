@@ -1,6 +1,7 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <body>
 	<jsp:include page="../project/form/edit_project.jsp" />
@@ -23,8 +24,12 @@
 							</div>
 							<div class="panel-footer clearfix">
 								<div class="footer-buttons">
-									<button type="button" class="edit-project btn btn-primary" href="${pageContext.request.contextPath}/project/${project.id}/entity"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
-									<button type="button" class="delete-project btn btn-danger" href="${pageContext.request.contextPath}/project/${project.id}"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+									<button type="button" class="edit-project btn btn-primary" href="${pageContext.request.contextPath}/project/${project.id}/entity">
+										<span class="glyphicon glyphicon-edit"></span> <spring:message code="button.edit" />
+									</button>
+									<button type="button" class="delete-project btn btn-danger" href="${pageContext.request.contextPath}/project/${project.id}">
+										<span class="glyphicon glyphicon-remove"></span> <spring:message code="button.delete" />
+									</button>
 								</div>
 							</div>
 						</div>
@@ -32,7 +37,7 @@
 				</c:when>
 				<c:otherwise>
 					<div class="alert alert-info" role="alert">
-						You don't have any projects.
+						<spring:message code="message.project.list.empty" />
 					</div>
 				</c:otherwise>
 			</c:choose>

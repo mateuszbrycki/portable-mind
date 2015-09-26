@@ -13,7 +13,7 @@ function refreshBoardTable(data) {
     newPanelGroup.id = 'panel-group';
 
     if(data.length == 0) {
-        var alertDiv = getEmptyAlert('projects');
+        var alertDiv = getEmptyAlert(translations['message-project-list-empty']);
         newPanelGroup.appendChild(alertDiv);
 
         $("#show-add-card-form-button").addClass('disabled');
@@ -70,7 +70,7 @@ function refreshBoardTable(data) {
 
             var editGlyphicon = document.createElement('span');
             editGlyphicon.className = 'glyphicon glyphicon-edit';
-            var editText = document.createTextNode(' Edit');
+            var editText = document.createTextNode(' ' + translations['button-edit']);
 
             editButton.appendChild(editGlyphicon);
             editButton.appendChild(editText);
@@ -82,7 +82,7 @@ function refreshBoardTable(data) {
 
             var deleteGlyphicon = document.createElement('span');
             deleteGlyphicon.className = 'glyphicon glyphicon-remove';
-            var deleteText = document.createTextNode(' Delete');
+            var deleteText = document.createTextNode(' ' + translations['button-delete']);
 
             deleteButton.appendChild(deleteGlyphicon);
             deleteButton.appendChild(deleteText);
@@ -104,14 +104,14 @@ function refreshBoardTable(data) {
 function refreshCardList(data) {
 
     if (!$('#card-list').length) {
-       return;
+        return;
     }
     var oldPanelGroup = document.getElementById('panel-group');
     var newPanelGroup = document.createElement('div');
     newPanelGroup.id = 'panel-group';
 
     if(data.length == 0) {
-        var alertDiv = getEmptyAlert('cards');
+        var alertDiv = getEmptyAlert(translations['message-card-list-empty']);
         newPanelGroup.appendChild(alertDiv);
     }
 
@@ -169,7 +169,7 @@ function refreshCardList(data) {
 
             var editGlyphicon = document.createElement('span');
             editGlyphicon.className = 'glyphicon glyphicon-edit';
-            var editText = document.createTextNode(' Edit');
+            var editText = document.createTextNode(' ' + translations['button-edit']);
 
             editButton.appendChild(editGlyphicon);
             editButton.appendChild(editText);
@@ -181,7 +181,7 @@ function refreshCardList(data) {
 
             var deleteGlyphicon = document.createElement('span');
             deleteGlyphicon.className = 'glyphicon glyphicon-remove';
-            var deleteText = document.createTextNode(' Delete');
+            var deleteText = document.createTextNode(' ' + translations['button-delete']);
 
             deleteButton.appendChild(deleteGlyphicon);
             deleteButton.appendChild(deleteText);
@@ -264,7 +264,7 @@ function reloadCardCategories() {
         },
         success : refreshCardCategoriesSelect,
         error : function(){
-            console.log("Request failed.");
+            console.log(translations['request-failed']);
         }
     });
 }
@@ -332,10 +332,6 @@ function getCSRFRequestHeader() {
     return result;
 }
 
-function processCardForm(frm, e) {
-
-}
-
 $(document).ready(function() {
 
     $(document).on('click', '#show-add-card-form', function() {
@@ -390,20 +386,20 @@ $(document).ready(function() {
     });
 
     $('#add-project-form').validate( {
-       rules:
-       {
-           name:
-           {
-               required: true,
-               minlength:5
-           },
+        rules:
+        {
+            name:
+            {
+                required: true,
+                minlength:5
+            },
 
-           description:
-           {
-               required: true,
-               minlength:5
-           }
-       }
+            description:
+            {
+                required: true,
+                minlength:5
+            }
+        }
     });
 
     $(document).on('submit', '#add-project-form', function(e) {
@@ -433,7 +429,7 @@ $(document).ready(function() {
                     refreshBoardTable(callback);
                 },
                 error: function (callback) {
-                    console.log("Request failed.");
+                    console.log(translations['request-failed']);
                 }
             });
             refreshForm(frm);
@@ -471,7 +467,7 @@ $(document).ready(function() {
                     refreshBoardTable(callback);
                 },
                 error: function (callback) {
-                    console.log("Request failed.");
+                    console.log(translations['request-failed']);
                 }
             });
 
@@ -510,7 +506,7 @@ $(document).ready(function() {
                     refreshCardList(callback);
                 },
                 error: function (callback) {
-                    console.log("Request failed.");
+                    console.log(translations['request-failed']);
                 }
             });
 
@@ -549,7 +545,7 @@ $(document).ready(function() {
                     refreshCardList(callback);
                 },
                 error: function (callback) {
-                    console.log("Request failed.");
+                    console.log(translations['request-failed']);
                 }
             });
 
@@ -574,7 +570,7 @@ $(document).ready(function() {
                 refreshCardList(callback)
             },
             error : function (callback) {
-                console.log("Request failed.");
+                console.log(translations['request-failed']);
             }
         });
     });
@@ -617,7 +613,7 @@ $(document).ready(function() {
                 showEditCardForm();
             },
             error: function() {
-                console.log("Request failed.");
+                console.log(translations['request-failed']);
             }
         });
     });
@@ -638,7 +634,7 @@ $(document).ready(function() {
                 showEditProjectForm();
             },
             error: function() {
-                console.log("Request failed.");
+                console.log(translations['request-failed']);
             }
         });
     });
