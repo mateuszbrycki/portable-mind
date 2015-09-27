@@ -349,8 +349,11 @@ function changeLanguage(data) {
 }
 
 $(document).ready(function() {
-    $('#language-select').val($.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE"));
-
+    if($.cookie(languageCookieName)) {
+        $('#language-select').val($.cookie(languageCookieName));
+    } else {
+        $("#language-select").val($("#language-select").val());
+    }
     try {
         $("#language-select").msDropDown();
         $("#language-select_msdd").width(80);

@@ -18,7 +18,10 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/shCore.css" />"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/shThemeEclipse.css" />"/>
 
-    <script>var ctx = "${pageContext.request.contextPath}";</script>
+    <script>
+        var ctx = "${pageContext.request.contextPath}";
+        var languageCookieName = "org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE";
+    </script>
     <script>
       var translations = {
         'button-edit': "<spring:message code="button.edit" />",
