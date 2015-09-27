@@ -332,7 +332,31 @@ function getCSRFRequestHeader() {
     return result;
 }
 
+function changeLanguage(data) {
+
+    $.ajax({
+        contentType: "application/text; charset=utf-8",
+        type: "GET",
+        url: ctx + "?language=" + data,
+        success: function(callback) {
+            location.reload();
+        },
+        error: function (callback) {
+            console.log(callback);
+        }
+    });
+
+}
+
 $(document).ready(function() {
+    $('#language-select').val($.cookie("org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE"));
+
+    try {
+        $("#language-select").msDropDown();
+        $("#language-select_msdd").width(80);
+    } catch(e) {
+        alert(e.message);
+    }
 
     $(document).on('click', '#show-add-card-form', function() {
         if(!$("#show-add-card-form-button").hasClass("disabled")) {

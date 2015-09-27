@@ -12,6 +12,7 @@
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap_3_2_0_min.css" />">
+    <link rel="stylesheet" href="<c:url value="/resources/css/msdropdown_dd.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/styles.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-glyphicons.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/shCore.css" />"/>
@@ -30,6 +31,8 @@
 
     <script src="<c:url value="/resources/js/jquery_1_11_1_min.js" />" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/bootstrap_3_2_0_min.js" />" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery_msdropdown_dd.js" />" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/jquery_cookie_1_4_1.js" />" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/jquery_validate_1_12_0_min.js" />"></script>
     <script src="<c:url value="/resources/js/common.js" />" type="text/javascript"></script>
 
