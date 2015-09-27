@@ -5,23 +5,22 @@ import com.portablemind.user.UserUtilities;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import java.util.List;
 
-@Controller
-@RequestMapping("/cards")
-public class CardsController {
+@RestController
+@RequestMapping(CardUrls.Api.CARDS)
+public class RestCardsController {
 
     @Inject
     CardService cardService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<List<Card>> getAllUserCards() {
+    public ResponseEntity<List<Card>> get() {
 
         Integer userId = UserUtilities.getLoggedUserId();
 

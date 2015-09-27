@@ -1,3 +1,4 @@
+<%@ page import="com.portablemind.card.CardUrls" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div id="edit-card-modal" class="modal fade" tabindex="-1">
@@ -7,7 +8,7 @@
                 <button type="button" class="close edit-card-form-close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="edit-card-modal-title"><spring:message code="card.modal.title.edit" /></h4>
             </div>
-            <form method="PUT" id="edit-card-form" action="${pageContext.request.contextPath}/card" class="form-horizontal" >
+            <form method="PUT" id="edit-card-form" action="${pageContext.request.contextPath}<%=CardUrls.Api.CARD%>" class="form-horizontal" >
                 <div class="modal-body">
                     <input type="hidden" name="id" value="" />
                     <input type="hidden" name="project" value="" />

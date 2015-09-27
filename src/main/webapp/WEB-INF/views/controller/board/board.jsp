@@ -1,3 +1,4 @@
+<%@ page import="com.portablemind.project.ProjectUrls" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -24,10 +25,10 @@
 							</div>
 							<div class="panel-footer clearfix">
 								<div class="footer-buttons">
-									<button type="button" class="edit-project btn btn-primary" href="${pageContext.request.contextPath}/project/${project.id}/entity">
+									<button type="button" class="edit-project btn btn-primary" href="${pageContext.request.contextPath}<%=ProjectUrls.Api.PROJECT%>/${project.id}">
 										<span class="glyphicon glyphicon-edit"></span> <spring:message code="button.edit" />
 									</button>
-									<button type="button" class="delete-project btn btn-danger" href="${pageContext.request.contextPath}/project/${project.id}">
+									<button type="button" class="delete-project btn btn-danger" href="${pageContext.request.contextPath}<%=ProjectUrls.Api.PROJECT%>/${project.id}">
 										<span class="glyphicon glyphicon-remove"></span> <spring:message code="button.delete" />
 									</button>
 								</div>

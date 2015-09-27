@@ -66,7 +66,7 @@ function refreshBoardTable(data) {
             var editButton = document.createElement('button');
             editButton.className = 'edit-project btn btn-primary';
             editButton.type = 'button';
-            editButton.setAttribute('href', ctx + '/project/' + data[i].id + '/entity');
+            editButton.setAttribute('href', ctx + url['api_project'] + '/' + data[i].id + '');
 
             var editGlyphicon = document.createElement('span');
             editGlyphicon.className = 'glyphicon glyphicon-edit';
@@ -78,7 +78,7 @@ function refreshBoardTable(data) {
             var deleteButton = document.createElement('button');
             deleteButton.className = 'delete-project btn btn-danger';
             deleteButton.type = 'button';
-            deleteButton.setAttribute('href', ctx + '/project/' + data[i].id);
+            deleteButton.setAttribute('href', ctx + url['api_project'] + '/' + data[i].id);
 
             var deleteGlyphicon = document.createElement('span');
             deleteGlyphicon.className = 'glyphicon glyphicon-remove';
@@ -165,7 +165,7 @@ function refreshCardList(data) {
             var editButton = document.createElement('button');
             editButton.className = 'edit-card btn btn-primary';
             editButton.type = 'button';
-            editButton.setAttribute('href', ctx + '/card/' + data[i].id);
+            editButton.setAttribute('href', ctx + url['api_card'] + '/' + data[i].id);
 
             var editGlyphicon = document.createElement('span');
             editGlyphicon.className = 'glyphicon glyphicon-edit';
@@ -177,7 +177,7 @@ function refreshCardList(data) {
             var deleteButton = document.createElement('button');
             deleteButton.className = 'delete-card btn btn-danger';
             deleteButton.type = 'button';
-            deleteButton.setAttribute('href', ctx + '/card/' + data[i].id);
+            deleteButton.setAttribute('href', ctx + url['api_card'] + '/' + data[i].id);
 
             var deleteGlyphicon = document.createElement('span');
             deleteGlyphicon.className = 'glyphicon glyphicon-remove';
@@ -257,7 +257,7 @@ function reloadCardCategories() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         type: "GET",
-        url:  ctx + "/cardCategories",
+        url:  ctx + url['api_cardCategory'] + '/',
         beforeSend: function(xhr) {
             var csrfData = getCSRFRequestHeader();
             xhr.setRequestHeader(csrfData['header'], csrfData['token']);

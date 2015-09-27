@@ -7,17 +7,15 @@ import com.portablemind.user.UserUtilities;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.portablemind.app.Response;
 
 import javax.inject.Inject;
 import java.util.List;
 
-@Controller
-@RequestMapping("/card")
-public class CardController {
-    private String viewPath = "controller/card/";
+@RestController
+@RequestMapping(CardUrls.Api.CARD)
+public class RestCardController {
 
     @Inject
     CardService cardService;
@@ -29,7 +27,7 @@ public class CardController {
     CardCategoryService cardCategoryService;
 
     @RequestMapping(method = RequestMethod.PUT)
-    public @ResponseBody ResponseEntity<List<Card>> addCard(@RequestBody CardDTO cardDTO) {
+    public ResponseEntity<List<Card>> put(@RequestBody CardDTO cardDTO) {
 
         Integer userId = UserUtilities.getLoggedUserId();
         Integer projectId = cardDTO.getProject();
@@ -56,8 +54,8 @@ public class CardController {
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/{cardId}", method = RequestMethod.DELETE)
-    public @ResponseBody ResponseEntity<List<Card>> deleteCard(@PathVariable("cardId") Integer id) {
+    @RequestMapping(value = CardUrls.Api.CARD_ID, method = RequestMethod.DELETE)
+    public ResponseEntity<List<Card>> delete(@PathVariable("cardId") Integer id) {
         Integer userId = UserUtilities.getLoggedUserId();
 
         if(cardService.getCardOwner(id) != userId) {
@@ -73,8 +71,8 @@ public class CardController {
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<Object> editCard(@PathVariable("id") Integer id) {
+    @RequestMapping(value = CardUrls.Api.CARD_ID, method = RequestMethod.GET)
+    public ResponseEntity<Object> post(@PathVariable("cardId") Integer id) {
 
         if(cardService.getCardOwner(id) != UserUtilities.getLoggedUserId()) {
             return new ResponseEntity<Object>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);

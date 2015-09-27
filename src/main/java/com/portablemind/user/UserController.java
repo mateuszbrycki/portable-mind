@@ -16,7 +16,7 @@ import javax.inject.Inject;
  */
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(UserUrls.USER)
 public class UserController {
 
     @Inject
@@ -27,7 +27,7 @@ public class UserController {
 
     private String viewPath = "controller/user/";
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = UserUrls.USER_LOGIN, method = RequestMethod.GET)
     public String loginFormPage(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout, ModelMap model) {
         if (error != null) {
@@ -40,25 +40,25 @@ public class UserController {
         return this.viewPath + "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = UserUrls.USER_LOGIN, method = RequestMethod.POST)
     public String loginPage() {
 
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @RequestMapping(value = UserUrls.USER_LOGOUT, method = RequestMethod.GET)
     public String logoutPage() {
 
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = UserUrls.USER_REGISTER, method = RequestMethod.GET)
     public String registerFormPage() {
 
         return this.viewPath + "register";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = UserUrls.USER_REGISTER, method = RequestMethod.POST)
     public String registerPage(@RequestParam("mail") String mail,
                                @RequestParam("password") String password,
                                @RequestParam("password_repeat") String passwordRepeat,

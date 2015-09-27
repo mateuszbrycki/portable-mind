@@ -1,3 +1,4 @@
+<%@ page import="com.portablemind.project.ProjectUrls" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div id="add-project-modal" class="modal fade">
   <div class="modal-dialog">
@@ -6,7 +7,7 @@
         <button type="button" class="close add-project-form-close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title"><spring:message code="project.modal.title.add" /></h4>
       </div>
-      <form method="PUT" id="add-project-form" action="${pageContext.request.contextPath}/project" class="form-horizontal">
+      <form method="PUT" id="add-project-form" action="${pageContext.request.contextPath}<%=ProjectUrls.Api.PROJECT%>" class="form-horizontal">
         <div class="modal-body">
             <div class="form-group">
               <label class="control-label col-sm-3" for="projectName"><spring:message code="project.modal.name" />:</label>

@@ -1,3 +1,6 @@
+<%@ page import="com.portablemind.card.CardUrls" %>
+<%@ page import="com.portablemind.project.ProjectUrls" %>
+<%@ page import="com.portablemind.cardCategory.CardCategoryUrls" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -21,15 +24,20 @@
     <script>
         var ctx = "${pageContext.request.contextPath}";
         var languageCookieName = "org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE";
-    </script>
-    <script>
-      var translations = {
-        'button-edit': "<spring:message code="button.edit" />",
-        'button-delete': "<spring:message code="button.delete" />",
-        'message-project-list-empty': "<spring:message code="message.project.list.empty" />",
-        'message-card-list-empty':"<spring:message code="message.card.list.empty" />",
-        'request-failed': "<spring:message code="request.failed" />"
-      };
+
+        var url = {
+            'api_card': "<%=CardUrls.Api.CARD%>",
+            'api_cardCategories': "<%=CardCategoryUrls.Api.CARD_CATEGORY%>",
+            'api_project': "<%=ProjectUrls.Api.PROJECT%>"
+        };
+
+        var translations = {
+            'button-edit': "<spring:message code="button.edit" />",
+            'button-delete': "<spring:message code="button.delete" />",
+            'message-project-list-empty': "<spring:message code="message.project.list.empty" />",
+            'message-card-list-empty':"<spring:message code="message.card.list.empty" />",
+            'request-failed': "<spring:message code="request.failed" />"
+          };
     </script>
 
     <script src="<c:url value="/resources/js/jquery_1_11_1_min.js" />" type="text/javascript"></script>

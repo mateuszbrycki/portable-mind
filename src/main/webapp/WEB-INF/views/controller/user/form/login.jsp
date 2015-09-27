@@ -1,9 +1,10 @@
+<%@ page import="com.portablemind.user.UserUrls" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page session="true"%>
 
-  <form id='user-login-form' action="${pageContext.request.contextPath}/user/login" method='POST' class="form-horizontal">
+  <form id='user-login-form' action="${pageContext.request.contextPath}<%=UserUrls.USER_LOGIN_FORM%>" method='POST' class="form-horizontal">
 
       <div class="form-group">
         <label class="control-label col-sm-3" for="userLogin"><spring:message code="user.login" />: </label>

@@ -1,3 +1,4 @@
+<%@ page import="com.portablemind.cardCategory.CardCategoryUrls" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div id="add-card-category-modal" class="modal fade" tabindex="-1">
   <div class="modal-dialog">
@@ -6,7 +7,7 @@
         <button type="button" class="close add-card-category-form-close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title"><spring:message code="cardcategory.modal.title.add" /></h4>
       </div>
-      <form method="PUT" id="add-card-category-form" action="${pageContext.request.contextPath}/cardCategory" class="form-horizontal"  enctype="multipart/form-data">
+      <form method="PUT" id="add-card-category-form" action="${pageContext.request.contextPath}<%=CardCategoryUrls.Api.CARD_CATEGORY%>" class="form-horizontal"  enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <label class="control-label col-sm-3" for="cardCategoryName"><spring:message code="cardcategory.modal.name" />:</label>
