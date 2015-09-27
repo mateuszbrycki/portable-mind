@@ -4,12 +4,14 @@ import com.portablemind.app.AbstractDao;
 import com.portablemind.card.Card;
 import com.portablemind.cardCategory.service.CardCategoryService;
 import com.portablemind.project.service.ProjectService;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +22,10 @@ import java.util.List;
 @Repository("cardDao")
 public class CardDaoImpl extends AbstractDao implements CardDao {
 
-    @Autowired
+    @Inject
     ProjectService projectService;
 
-    @Autowired
+    @Inject
     CardCategoryService cardCategoryService;
 
     public void saveCard(Card card) {

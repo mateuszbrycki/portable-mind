@@ -8,7 +8,7 @@ import com.portablemind.cardCategory.service.CardCategoryService;
 import com.portablemind.project.service.ProjectService;
 import com.portablemind.user.UserSecurity;
 import com.portablemind.user.UserUtilities;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -29,13 +29,13 @@ import java.util.List;
 @RequestMapping(value="/project")
 public class ProjectController {
 
-    @Autowired
+    @Inject
     ProjectService projectService;
 
-    @Autowired
+    @Inject
     CardService cardService;
 
-    @Autowired
+    @Inject
     CardCategoryService cardCategoryService;
 
     private String viewPath = "controller/project/";

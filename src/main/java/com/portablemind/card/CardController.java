@@ -1,20 +1,17 @@
 package com.portablemind.card;
 
-/**
- * Created by Mateusz Brycki on 02/05/2015.
- */
-
 import com.portablemind.card.service.CardService;
 import com.portablemind.cardCategory.service.CardCategoryService;
 import com.portablemind.project.service.ProjectService;
 import com.portablemind.user.UserUtilities;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.portablemind.app.Response;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Controller
@@ -22,13 +19,13 @@ import java.util.List;
 public class CardController {
     private String viewPath = "controller/card/";
 
-    @Autowired
+    @Inject
     CardService cardService;
 
-    @Autowired
+    @Inject
     ProjectService projectService;
 
-    @Autowired
+    @Inject
     CardCategoryService cardCategoryService;
 
     @RequestMapping(method = RequestMethod.PUT)

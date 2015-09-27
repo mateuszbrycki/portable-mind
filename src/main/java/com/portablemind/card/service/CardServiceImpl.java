@@ -2,10 +2,11 @@ package com.portablemind.card.service;
 
 import com.portablemind.card.Card;
 import com.portablemind.card.dao.CardDao;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 @Service("cardService")
 @Transactional
 public class CardServiceImpl implements CardService {
-    @Autowired
+    @Inject
     private CardDao dao;
 
     public void saveCard(Card card) {

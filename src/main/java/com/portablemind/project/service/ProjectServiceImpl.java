@@ -4,8 +4,8 @@ import com.portablemind.project.Project;
 import com.portablemind.project.dao.ProjectDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional
 public class ProjectServiceImpl implements ProjectService {
 
-    @Autowired
+    @Inject
     private ProjectDao dao;
 
     public void saveProject(Project project) {

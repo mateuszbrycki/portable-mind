@@ -2,12 +2,14 @@ package com.portablemind.user;
 
 import com.portablemind.user.service.UserService;
 import com.portablemind.userrole.service.UserRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.inject.Inject;
 
 /**
  * Created by Mateusz Brycki on 12/05/2015.
@@ -17,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value = "/user")
 public class UserController {
 
-    @Autowired
+    @Inject
     private UserService userService;
 
-    @Autowired
+    @Inject
     private UserRoleService userRoleService;
 
     private String viewPath = "controller/user/";

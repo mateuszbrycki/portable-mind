@@ -2,13 +2,14 @@ package com.portablemind.app;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 
 /**
  * Created by Mateusz Brycki on 28/04/2015.
  */
 public class AbstractDao {
-    @Autowired
+    @Inject
     private SessionFactory sessionFactory;
 
     protected Session getSession(){

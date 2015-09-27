@@ -1,6 +1,5 @@
 package com.portablemind.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import javax.inject.Inject;
 import java.util.Locale;
 
 /**
@@ -29,7 +29,7 @@ import java.util.Locale;
 @PropertySource(value = { "classpath:application.properties" })
 public class AppConfig extends WebMvcConfigurerAdapter {
 
-    @Autowired
+    @Inject
     private Environment environment;
 
     @Bean

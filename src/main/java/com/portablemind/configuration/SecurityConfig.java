@@ -1,13 +1,10 @@
 package com.portablemind.configuration;
 
-/**
- * Created by Mateusz Brycki on 27/05/2015.
- */
-
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import com.portablemind.user.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -22,13 +19,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @ComponentScan("com.portablemind")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+    @Inject
     DataSource dataSource;
 
-    @Autowired
+    @Inject
     UserDetailsServiceImpl userDetailsServiceImpl;
 
-    @Autowired
+    @Inject
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userDetailsServiceImpl);

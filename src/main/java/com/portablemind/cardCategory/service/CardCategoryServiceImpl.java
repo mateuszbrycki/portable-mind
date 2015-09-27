@@ -3,10 +3,11 @@ package com.portablemind.cardCategory.service;
 
 import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.cardCategory.dao.CardCategoryDao;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
 @Transactional
 public class CardCategoryServiceImpl implements CardCategoryService {
 
-    @Autowired
+    @Inject
     private CardCategoryDao dao;
 
     public void saveCardCategory(CardCategory cardCategory) {

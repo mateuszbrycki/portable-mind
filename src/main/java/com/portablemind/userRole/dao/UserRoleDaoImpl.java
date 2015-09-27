@@ -4,9 +4,10 @@ import com.portablemind.app.AbstractDao;
 import com.portablemind.userrole.UserRole;
 import com.portablemind.userrole.service.UserRoleService;
 import org.hibernate.Query;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Repository("userRoleDao")
 public class UserRoleDaoImpl extends AbstractDao implements UserRoleDao {
 
-    @Autowired
+    @Inject
     UserRoleService userRoleService;
 
     public void saveUserRole(UserRole userRole) {

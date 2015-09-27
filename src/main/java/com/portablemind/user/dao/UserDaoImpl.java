@@ -5,9 +5,10 @@ import com.portablemind.user.User;
 import com.portablemind.userrole.service.UserRoleService;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao implements UserDao {
 
-    @Autowired
+    @Inject
     UserRoleService userRoleService;
 
     public void saveUser(User user) {

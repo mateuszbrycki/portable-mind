@@ -2,10 +2,11 @@ package com.portablemind.user.service;
 
 import com.portablemind.user.User;
 import com.portablemind.user.dao.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -14,7 +15,8 @@ import java.util.List;
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService {
-    @Autowired
+
+    @Inject
     private UserDao userDao;
 
     public void saveUser(User user) { userDao.saveUser(user);}
