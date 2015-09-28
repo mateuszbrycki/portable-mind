@@ -666,6 +666,28 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on('change', '#category-filter-select', function() {
+        var value = this.value;
+
+        var requestUrl = ctx + url['api_project'] + "/" + projectId + "/cards";
+        if(value != 0) {
+            requestUrl += "?category=" + value;
+        }
+
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "GET",
+            url: requestUrl,
+            success: function (callback) {
+                refreshCardList(callback);
+            },
+            error: function () {
+                console.log(translations['request-failed']);
+            }
+        });
+    });
+
     $(document).on('click', '.add-card-form-close', function() {
         refreshForm($('#add-card-form'));
         $("#add-card-modal").modal('hide');

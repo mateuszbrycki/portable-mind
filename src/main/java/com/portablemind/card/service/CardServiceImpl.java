@@ -3,6 +3,7 @@ package com.portablemind.card.service;
 import com.portablemind.card.Card;
 import com.portablemind.card.dao.CardDao;
 
+import com.portablemind.filter.FilterManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,7 @@ public class CardServiceImpl implements CardService {
 
     public List<Card> findAllProjectCards(Integer id) {return dao.findAllProjectCards(id); }
 
-    public List<Card> findAllUserProjectCards(Integer id, Integer projectId) {return dao.findAllUserProjectCards(id, projectId); }
+    public List<Card> findAllUserProjectCards(FilterManager filterManager) {return dao.findAllUserProjectCards(filterManager); }
 
     public Card findById(Integer id) {
         return dao.findById(id);

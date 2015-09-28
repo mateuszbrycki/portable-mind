@@ -28,7 +28,8 @@
         var url = {
             'api_card': "<%=CardUrls.Api.CARD%>",
             'api_cardCategories': "<%=CardCategoryUrls.Api.CARD_CATEGORY%>",
-            'api_project': "<%=ProjectUrls.Api.PROJECT%>"
+            'api_project': "<%=ProjectUrls.Api.PROJECT%>",
+            'api_project_cards': "<%=ProjectUrls.Api.PROJECT_ID_CARDS%>"
         };
 
         var translations = {

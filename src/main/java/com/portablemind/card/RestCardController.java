@@ -2,9 +2,13 @@ package com.portablemind.card;
 
 import com.portablemind.card.service.CardService;
 import com.portablemind.cardCategory.service.CardCategoryService;
+import com.portablemind.filter.FilterManager;
+import com.portablemind.filter.ProjectFilter;
+import com.portablemind.filter.UserFilter;
 import com.portablemind.project.service.ProjectService;
 import com.portablemind.user.UserUtilities;
 
+import com.portablemind.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +30,9 @@ public class RestCardController {
     @Inject
     CardCategoryService cardCategoryService;
 
+    @Inject
+    UserService userService;
+
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<List<Card>> put(@RequestBody CardDTO cardDTO) {
 
@@ -38,7 +45,7 @@ public class RestCardController {
         card.setCategory(cardCategoryService.findById(cardDTO.getCategory()));
         card.setName(cardDTO.getName());
         card.setDescription(cardDTO.getDescription());
-        card.setOwner(userId);
+        card.setOwner(userService.findById(userId));
 
         Integer id = cardDTO.getId();
 
@@ -49,7 +56,11 @@ public class RestCardController {
             cardService.saveCard(card);
         }
 
-        List<Card> cards = cardService.findAllUserProjectCards(userId, projectId);
+        FilterManager filterManager = new FilterManager();
+        filterManager.addFilter(new UserFilter(UserUtilities.getLoggedUserId()));
+        filterManager.addFilter(new ProjectFilter(projectId));
+
+        List<Card> cards = cardService.findAllUserProjectCards(filterManager);
 
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }
@@ -66,7 +77,11 @@ public class RestCardController {
         Integer projectId = cardService.findById(id).getProject().getId();
         cardService.deleteCardById(id);
 
-        List<Card> cards = cardService.findAllUserProjectCards(userId, projectId);
+        FilterManager filterManager = new FilterManager();
+        filterManager.addFilter(new UserFilter(UserUtilities.getLoggedUserId()));
+        filterManager.addFilter(new ProjectFilter(projectId));
+
+        List<Card> cards = cardService.findAllUserProjectCards(filterManager);
 
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }

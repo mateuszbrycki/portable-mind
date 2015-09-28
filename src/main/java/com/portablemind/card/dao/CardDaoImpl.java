@@ -3,11 +3,16 @@ package com.portablemind.card.dao;
 import com.portablemind.app.AbstractDao;
 import com.portablemind.card.Card;
 import com.portablemind.cardCategory.service.CardCategoryService;
+import com.portablemind.filter.FilterManager;
+import com.portablemind.filter.hibernate.HibernateFilter;
 import com.portablemind.project.service.ProjectService;
+import com.portablemind.user.User;
+import com.portablemind.user.service.UserService;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
+
 
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +32,9 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
 
     @Inject
     CardCategoryService cardCategoryService;
+
+    @Inject
+    UserService userService;
 
     public void saveCard(Card card) {
         persist(card);
@@ -68,17 +76,15 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
         return cards;
     }
 
-    public List<Card> findAllUserProjectCards(Integer id, Integer projectId) {
-        Query query = getSession().createSQLQuery("SELECT c.* FROM card c WHERE c.fk_user_id = :id AND fk_project_id = :projectId");
-        query.setString("id", id.toString());
-        query.setString("projectId", projectId.toString());
-        List<Object[]> result = query.list();
+    public List<Card> findAllUserProjectCards(FilterManager filterManager) {
 
-        List<Card> cards = new ArrayList<Card>();
-
-        for(Object[] card : result) {
-            cards.add(this.mapCardObject(card));
+        Criteria cri = getSession().createCriteria(Card.class);
+        List<HibernateFilter> hibernateFilters = filterManager.getFiltersForHibernate();
+        for(HibernateFilter filter : hibernateFilters) {
+            cri.add(filter.execute());
         }
+
+        List<Card> cards = cri.list();
 
         return cards;
     }
@@ -112,7 +118,7 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
 
         Card card = new Card();
         card.setId((Integer) cardObject[0]);
-        card.setOwner((Integer) cardObject[1]);
+        card.setOwner((User) userService.findById((Integer) cardObject[1]));
         card.setCategory(cardCategoryService.findById((Integer) cardObject[2]));
         card.setProject(projectService.findById((Integer) cardObject[3]));
         card.setName((String) cardObject[4]);

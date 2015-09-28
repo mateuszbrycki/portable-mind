@@ -2,6 +2,7 @@ package com.portablemind.card;
 
 import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.project.Project;
+import com.portablemind.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,9 +18,10 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToOne
     @NotNull
-    @Column(name="fk_user_id")
-    private Integer owner;
+    @JoinColumn(name = "fk_user_id")
+    private User owner;
 
     @OneToOne
     @NotNull
@@ -40,7 +42,7 @@ public class Card {
 
     public Card() {}
 
-    public Card(Integer owner, Project project, CardCategory cardCategory, String cardDescription) {
+    public Card(User owner, Project project, CardCategory cardCategory, String cardDescription) {
         this.owner = owner;
         this.project = project;
         this.category = cardCategory;
@@ -64,11 +66,11 @@ public class Card {
         this.id = id;
     }
 
-    public Integer getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Integer owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 

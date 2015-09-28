@@ -1,6 +1,7 @@
 package com.portablemind.card.dao;
 
 import com.portablemind.card.Card;
+import com.portablemind.filter.FilterManager;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface CardDao {
 
     List<Card> findAllProjectCards(Integer id);
 
-    List<Card> findAllUserProjectCards(Integer id, Integer projectId);
+    List<Card> findAllUserProjectCards(FilterManager filterManager);
 
     Card findById(Integer id);
 

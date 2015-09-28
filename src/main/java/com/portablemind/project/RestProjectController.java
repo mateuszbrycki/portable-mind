@@ -4,6 +4,7 @@ import com.portablemind.app.Response;
 import com.portablemind.card.Card;
 import com.portablemind.card.service.CardService;
 import com.portablemind.cardCategory.service.CardCategoryService;
+import com.portablemind.filter.*;
 import com.portablemind.project.service.ProjectService;
 import com.portablemind.user.UserSecurity;
 import com.portablemind.user.UserUtilities;
@@ -100,11 +101,20 @@ public class RestProjectController {
     }
 
     @RequestMapping(value=ProjectUrls.Api.PROJECT_ID_CARDS, method = RequestMethod.GET)
-    public ResponseEntity<List<Card>> getAllUserProjectCards(@PathVariable("projectId") Integer projectId) {
+    public ResponseEntity<List<Card>> getAllUserProjectCards(@PathVariable("projectId") Integer projectId,
+                                                             @RequestParam(value = "category", required = false) Integer cardCategoryId) {
+        //TODO mbrycki obsługa filtrów
+        FilterManager filterManager = new FilterManager();
+        filterManager.addFilter(new UserFilter(UserUtilities.getLoggedUserId()));
+        filterManager.addFilter(new ProjectFilter(projectId));
+
+        if(cardCategoryId != null) {
+            filterManager.addFilter(new CardCategoryFilter(cardCategoryId));
+        }
 
         Integer userId = UserUtilities.getLoggedUserId();
 
-        List<Card> cards = cardService.findAllUserProjectCards(userId, projectId);
+        List<Card> cards = cardService.findAllUserProjectCards(filterManager);
 
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }

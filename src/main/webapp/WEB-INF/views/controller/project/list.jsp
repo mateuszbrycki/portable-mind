@@ -12,6 +12,16 @@
 
   <script>var projectId = "${project.id}"</script>
   <jsp:include page="../card/form/edit_card.jsp" />
+  <div class="row">
+    <div class="col-md-4">
+      <select name="category-filter-select" class="form-control " id="category-filter-select">
+        <option value="0"><spring:message code="message.select.category" /></option>
+        <c:forEach items="${cardCategories}" var="cardCategory">
+          <option value="${cardCategory.id}">${cardCategory.name}</option>
+        </c:forEach>
+      </select>
+    </div>
+  </div>
   <div id="card-list">
     <div id="panel-group" id="accordion">
       <c:choose>
