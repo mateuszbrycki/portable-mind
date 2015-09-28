@@ -2,15 +2,15 @@ package com.portablemind.card;
 
 import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.project.Project;
-import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Mateusz Brycki on 28/04/2015.
  */
 @Entity
-@Table(name="CARD")
+@Table(name="card")
 public class Card {
 
     @Id
@@ -18,21 +18,24 @@ public class Card {
     private int id;
 
     @NotNull
-    @Column(name="FK_USER_ID")
+    @Column(name="fk_user_id")
     private Integer owner;
 
     @OneToOne
     @NotNull
-    @JoinColumn(name = "FK_CATEGORY_ID")
+    @JoinColumn(name = "fk_category_id")
     private CardCategory category;
 
     @OneToOne
     @NotNull
-    @JoinColumn(name="FK_PROJECT_ID")
+    @JoinColumn(name="fk_project_id")
     private Project project;
 
+    @Column(name="card_name")
+    private String name;
+
     @NotNull
-    @Column(name="CARD_DESCRIPTION")
+    @Column(name="card_description")
     private String description;
 
     public Card() {}
@@ -84,4 +87,8 @@ public class Card {
     public void setProject(Project type) {
         this.project = type;
     }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 }

@@ -7,6 +7,7 @@ public class CardDTO {
 
     private Integer id;
     private String description;
+    private String name;
     private Integer project;
     private Integer category;
 
@@ -41,4 +42,8 @@ public class CardDTO {
     public void setCategory(Integer category) {
         this.category = category;
     }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 }

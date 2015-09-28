@@ -1,31 +1,33 @@
 package com.portablemind.user;
 
 import com.portablemind.user.service.UserService;
-import com.portablemind.userRole.service.UserRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.portablemind.userrole.service.UserRoleService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.inject.Inject;
+
 /**
  * Created by Mateusz Brycki on 12/05/2015.
  */
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(UserUrls.USER)
 public class UserController {
 
-    @Autowired
+    @Inject
     private UserService userService;
 
-    @Autowired
+    @Inject
     private UserRoleService userRoleService;
 
     private String viewPath = "controller/user/";
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = UserUrls.USER_LOGIN, method = RequestMethod.GET)
     public String loginFormPage(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout, ModelMap model) {
         if (error != null) {
@@ -38,25 +40,25 @@ public class UserController {
         return this.viewPath + "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = UserUrls.USER_LOGIN, method = RequestMethod.POST)
     public String loginPage() {
 
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @RequestMapping(value = UserUrls.USER_LOGOUT, method = RequestMethod.GET)
     public String logoutPage() {
 
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = UserUrls.USER_REGISTER, method = RequestMethod.GET)
     public String registerFormPage() {
 
         return this.viewPath + "register";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = UserUrls.USER_REGISTER, method = RequestMethod.POST)
     public String registerPage(@RequestParam("mail") String mail,
                                @RequestParam("password") String password,
                                @RequestParam("password_repeat") String passwordRepeat,

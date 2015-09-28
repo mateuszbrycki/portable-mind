@@ -6,7 +6,7 @@
 <div class="container">
     <jsp:include page="../include/navbar_modals.jsp" />
 
-    <h1><a href="${pageContext.request.contextPath}">Portable Mind</a></h1>
+    <h1><a href="${pageContext.request.contextPath}"><spring:message code="portablemind" /></a></h1>
 
     <sitemesh:write property='body'/>
 

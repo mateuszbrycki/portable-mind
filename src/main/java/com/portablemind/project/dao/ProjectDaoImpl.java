@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -47,10 +48,31 @@ public class ProjectDaoImpl extends AbstractDao implements ProjectDao {
         return projects;
     }
 
+    public Boolean hasUserProjects(Integer id) {
+        Integer count = ((BigInteger)getSession().createSQLQuery("SELECT COUNT(*) FROM project WHERE fk_user_id = :id")
+                .setString("id", id.toString())
+                .uniqueResult())
+                .intValue();
+
+        if(count > 0) {
+            return true;
+        }
+
+        return false;
+
+    }
+
     public void deleteProjectById(Integer id) {
         Query query = getSession().createSQLQuery("DELETE p.* FROM project p WHERE p.id = :id");
         query.setString("id", id.toString());
         query.executeUpdate();
+    }
+
+    public Integer getProjectOwner(Integer id) {
+        Query query = getSession().createSQLQuery("SELECT p.fk_user_id FROM project p WHERE p.id = :id LIMIT 1");
+        query.setString("id", id.toString());
+
+        return (Integer)query.uniqueResult();
     }
 
     private Project mapProjectObject(Object[] projectObject) {

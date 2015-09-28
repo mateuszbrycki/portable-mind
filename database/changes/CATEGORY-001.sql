@@ -1,0 +1,1 @@
+ALTER TABLE card_category ADD category_icon VARCHAR(255);

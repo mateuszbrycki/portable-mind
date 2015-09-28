@@ -1,14 +1,12 @@
 package com.portablemind.configuration;
 
-/**
- * Created by Mateusz Brycki on 28/04/2015.
- */
 import java.util.Properties;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource(value = { "classpath:database.properties" })
 public class HibernateConfiguration {
 
-    @Autowired
+    @Inject
     private Environment environment;
 
     @Bean
@@ -56,7 +54,7 @@ public class HibernateConfiguration {
     }
 
     @Bean
-    @Autowired
+    @Inject
     public HibernateTransactionManager transactionManager(SessionFactory s) {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(s);

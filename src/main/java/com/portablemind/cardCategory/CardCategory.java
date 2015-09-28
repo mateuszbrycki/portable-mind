@@ -1,6 +1,8 @@
 package com.portablemind.cardCategory;
 
-import com.sun.istack.internal.NotNull;
+import com.portablemind.helper.image.ImageHelper;
+
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 
@@ -8,25 +10,23 @@ import javax.persistence.*;
  * Created by Mateusz Brycki on 03/05/2015.
  */
 @Entity
-@Table(name="CARD_CATEGORY")
+@Table(name="card_category")
 public class CardCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
-    @Column(name="FK_USER_ID")
-    private Integer owner;
-
-    @NotNull
-    @Column(name="CATEGORY_NAME")
+    @Column(name="category_name")
     private String name;
+
+    @Column(name="category_icon")
+    private String icon;
 
     public CardCategory() {}
 
-    public CardCategory(Integer id, String name, Integer owner) {
+    public CardCategory(Integer id, String name) {
         this.id = id;
-        this.owner = owner;
         this.name = name;
     }
 
@@ -38,14 +38,6 @@ public class CardCategory {
         this.id = id;
     }
 
-    public Integer getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Integer owner) {
-        this.owner = owner;
-    }
-
     public String getName() {
         return name;
     }
@@ -53,4 +45,10 @@ public class CardCategory {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getIcon() {
+        return ImageHelper.getCardCategoryImagePath() + "/" + icon;
+    }
+
+    public void setIcon(String icon) { this.icon = icon; }
 }

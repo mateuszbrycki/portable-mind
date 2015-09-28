@@ -1,7 +1,8 @@
 package com.portablemind.user;
 
+import com.portablemind.project.service.ProjectService;
 import com.portablemind.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,8 +21,11 @@ import java.util.Collection;
 @Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
+    @Inject
     private UserService userService;
+
+    @Inject
+    private ProjectService projectService;
 
     @Override
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
@@ -32,10 +37,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
             authorities.add(new SimpleGrantedAuthority(user.getRole().getRole()));
 
+            Integer userId = user.getId();
+
             UserSecurity securityUser = new
-                    UserSecurity(user.getId(), user.getMail(), user.getPassword(), user.isEnabled(),
+                    UserSecurity(userId, user.getMail(), user.getPassword(), user.isEnabled(),
                     true, true, true, authorities
             );
+
+            securityUser.setHasUserProjects(projectService.hasUserProjects(userId));
 
             return securityUser;
 

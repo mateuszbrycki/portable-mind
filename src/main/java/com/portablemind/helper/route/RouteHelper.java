@@ -8,7 +8,7 @@ import com.portablemind.helper.Helper;
 public class RouteHelper implements Helper {
 
     public static String getRoute(String routeName) {
-        return "NowaScie¿ka";
+        return "NowaSciezka";
     }
 
     public String getName() {

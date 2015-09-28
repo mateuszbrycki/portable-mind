@@ -19,5 +19,9 @@ public interface ProjectDao {
     void deleteProjectById(Integer id);
 
     List<Project> findAllUserProjects(Integer id);
+
+    Boolean hasUserProjects(Integer id);
+
+    Integer getProjectOwner(Integer id);
 }
 
