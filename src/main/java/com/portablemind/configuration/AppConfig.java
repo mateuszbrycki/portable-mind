@@ -1,5 +1,6 @@
 package com.portablemind.configuration;
 
+import com.portablemind.filter.FilterManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;

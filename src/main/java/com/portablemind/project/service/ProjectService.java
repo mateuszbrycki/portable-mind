@@ -14,7 +14,7 @@ public interface ProjectService {
 
     List<Project> findAllProjects();
 
-    Project findById(Integer id);
+    Project findProject(Integer id);
 
     void deleteProjectById(Integer id);
 

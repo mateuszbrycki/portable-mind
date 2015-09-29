@@ -1,6 +1,7 @@
 package com.portablemind.cardCategory.dao;
 
 import com.portablemind.cardCategory.CardCategory;
+import com.portablemind.filter.FilterManager;
 
 import java.util.List;
 
@@ -12,12 +13,8 @@ public interface CardCategoryDao {
 
     void updateCardCategory(CardCategory cardCategory);
 
-    List<CardCategory> findAllCardCategories();
-
-    CardCategory findById(Integer id);
+    List<CardCategory> find(FilterManager filterManager);
 
     void deleteCardCategoryById(Integer id);
-
-    List<CardCategory> findAllUserCardCategories(Integer id);
 }
 

@@ -14,7 +14,7 @@ public interface UserService {
 
     List<User> findAllUsers();
 
-    User findById(Integer id);
+    User findUser(Integer id);
 
     User findByMail(String mail);
 

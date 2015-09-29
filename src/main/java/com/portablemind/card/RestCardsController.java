@@ -1,8 +1,10 @@
 package com.portablemind.card;
 
 import com.portablemind.card.service.CardService;
+import com.portablemind.filter.FilterManager;
 import com.portablemind.user.UserUtilities;
 
+import com.portablemind.user.filter.OwnerIdFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

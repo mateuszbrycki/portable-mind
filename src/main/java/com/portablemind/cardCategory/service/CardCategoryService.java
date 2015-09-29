@@ -1,6 +1,7 @@
 package com.portablemind.cardCategory.service;
 
 import com.portablemind.cardCategory.CardCategory;
+import com.portablemind.filter.FilterManager;
 
 import java.util.List;
 
@@ -18,5 +19,4 @@ public interface CardCategoryService {
 
     void deleteCardCategoryById(Integer id);
 
-    List<CardCategory> findAllUserCardCategories(Integer id);
 }

@@ -27,4 +27,8 @@ public class FilterManager {
         return hibernateFilters;
 
     }
+
+    public void resetFilters() {
+        this.filters.clear();
+    }
 }

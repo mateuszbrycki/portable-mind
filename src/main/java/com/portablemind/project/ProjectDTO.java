@@ -1,7 +1,5 @@
 package com.portablemind.project;
 
-import org.springframework.web.multipart.MultipartFile;
-
 /**
  * Created by Mateusz Brycki on 17/08/2015.
  */

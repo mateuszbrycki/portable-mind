@@ -33,7 +33,7 @@ public class ProjectController {
     public String get(@PathVariable("projectId") Integer projectId, ModelMap model) {
         Integer userId = UserUtilities.getLoggedUserId();
 
-        Project project = projectService.findById(projectId);
+        Project project = projectService.findProject(projectId);
         model.addAttribute("project", project);
 
         List<Card> cards = cardService.findAllProjectCards(projectId);

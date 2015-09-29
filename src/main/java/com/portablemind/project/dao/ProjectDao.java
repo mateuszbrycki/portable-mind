@@ -1,5 +1,6 @@
 package com.portablemind.project.dao;
 
+import com.portablemind.filter.FilterManager;
 import com.portablemind.project.Project;
 
 import java.util.List;
@@ -12,13 +13,9 @@ public interface ProjectDao {
 
     void updateProject(Project project);
 
-    List<Project> findAllProjects();
-
-    Project findById(Integer id);
+    List<Project> find(FilterManager filterManager);
 
     void deleteProjectById(Integer id);
-
-    List<Project> findAllUserProjects(Integer id);
 
     Boolean hasUserProjects(Integer id);
 

@@ -274,7 +274,7 @@ function getEmptyAlert(element) {
     alertDiv.className = 'alert alert-info';
     alertDiv.setAttribute('role', 'alert');
 
-    alertDiv.appendChild(document.createTextNode("You don't have any " + element + "."));
+    alertDiv.appendChild(document.createTextNode(element));
 
     return alertDiv;
 }

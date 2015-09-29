@@ -13,15 +13,7 @@ public interface CardDao {
 
     void updateCard(Card card);
 
-    List<Card> findAllCards();
-
-    List<Card> findAllUserCards(Integer id);
-
-    List<Card> findAllProjectCards(Integer id);
-
-    List<Card> findAllUserProjectCards(FilterManager filterManager);
-
-    Card findById(Integer id);
+    List<Card> find(FilterManager filterManager);
 
     Integer getCardOwner(Integer id);
 

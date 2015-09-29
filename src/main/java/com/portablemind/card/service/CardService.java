@@ -19,9 +19,11 @@ public interface CardService {
 
     List<Card> findAllProjectCards(Integer id);
 
-    List<Card> findAllUserProjectCards(FilterManager filterManager);
+    List<Card> findAllUserProjectCards(Integer userId, Integer projectId);
 
-    Card findById(Integer id);
+    List<Card> findAllUserProjectCards(Integer userId, Integer projectId, Integer categoryId);
+
+    Card findCard(Integer id);
 
     Integer getCardOwner(Integer id);
 

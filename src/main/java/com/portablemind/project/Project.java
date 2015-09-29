@@ -1,5 +1,7 @@
 package com.portablemind.project;
 
+import com.portablemind.user.User;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 
@@ -13,9 +15,10 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToOne
     @NotNull
-    @Column(name="fk_user_id")
-    private Integer owner;
+    @JoinColumn(name = "fk_user_id")
+    private User owner;
 
     @NotNull
     @Column(name="name")
@@ -26,7 +29,7 @@ public class Project {
 
     public Project() {}
 
-    public Project(Integer id, String name, Integer owner) {
+    public Project(Integer id, String name, User owner) {
         this.id = id;
         this.owner = owner;
         this.name = name;
@@ -40,11 +43,11 @@ public class Project {
         this.id = id;
     }
 
-    public Integer getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Integer owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 

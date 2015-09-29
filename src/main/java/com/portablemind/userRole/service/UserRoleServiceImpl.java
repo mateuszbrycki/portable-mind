@@ -19,14 +19,18 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Inject
     private UserRoleDao userRoleDao;
 
+    @Override
     public void saveUserRole(UserRole userRole) {
         userRoleDao.saveUserRole(userRole);
     }
 
+    @Override
     public UserRole findById(Integer id) { return userRoleDao.findById(id); }
 
+    @Override
     public UserRole findByName(String role) { return userRoleDao.findByName(role); }
 
+    @Override
     public Set<UserRole> findByUserId(Integer userId) {return userRoleDao.findByUserId(userId);}
 }
 

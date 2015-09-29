@@ -2,7 +2,6 @@ package com.portablemind.configuration;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by Mateusz Brycki on 22/08/2015.

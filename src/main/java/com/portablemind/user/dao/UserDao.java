@@ -1,5 +1,6 @@
 package com.portablemind.user.dao;
 
+import com.portablemind.filter.FilterManager;
 import com.portablemind.user.User;
 
 import java.util.List;
@@ -12,11 +13,7 @@ public interface UserDao {
 
     void updateUser(User user);
 
-    List<User> findAllUsers();
-
-    User findById(Integer id);
-
-    User findByMail(String mail);
+    List<User> find(FilterManager filterManager);
 
     void deleteUserById(Integer id);
 

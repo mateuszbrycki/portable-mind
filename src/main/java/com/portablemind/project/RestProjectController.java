@@ -4,11 +4,11 @@ import com.portablemind.app.Response;
 import com.portablemind.card.Card;
 import com.portablemind.card.service.CardService;
 import com.portablemind.cardCategory.service.CardCategoryService;
-import com.portablemind.filter.*;
 import com.portablemind.project.service.ProjectService;
 import com.portablemind.user.UserSecurity;
 import com.portablemind.user.UserUtilities;
 
+import com.portablemind.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -35,6 +35,9 @@ public class RestProjectController {
     @Inject
     CardCategoryService cardCategoryService;
 
+    @Inject
+    UserService userService;
+
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<List<Project>> addProject(@RequestBody ProjectDTO projectDTO) {
@@ -44,7 +47,7 @@ public class RestProjectController {
 
         project.setName(projectDTO.getName());
         project.setDescription(projectDTO.getDescription());
-        project.setOwner(userId);
+        project.setOwner(userService.findUser(userId));
 
         Integer id = projectDTO.getId();
 
@@ -69,7 +72,7 @@ public class RestProjectController {
     @RequestMapping(value=ProjectUrls.Api.PROJECT_ID, method = RequestMethod.DELETE)
     public ResponseEntity<List<Project>> delete(@PathVariable("projectId") Integer projectId) {
         Integer userId = UserUtilities.getLoggedUserId();
-        if(projectService.findById(projectId).getOwner() != userId) {
+        if(projectService.findProject(projectId).getOwner().getId() != userId) {
             //return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
             //TODO mbrycki chujowo, przemyśleć
             return null;
@@ -94,7 +97,7 @@ public class RestProjectController {
             return new ResponseEntity<Object>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
         }
 
-        Project project = projectService.findById(projectId);
+        Project project = projectService.findProject(projectId);
 
         return new ResponseEntity<Object>(project, HttpStatus.OK);
 
@@ -103,18 +106,13 @@ public class RestProjectController {
     @RequestMapping(value=ProjectUrls.Api.PROJECT_ID_CARDS, method = RequestMethod.GET)
     public ResponseEntity<List<Card>> getAllUserProjectCards(@PathVariable("projectId") Integer projectId,
                                                              @RequestParam(value = "category", required = false) Integer cardCategoryId) {
-        //TODO mbrycki obsługa filtrów
-        FilterManager filterManager = new FilterManager();
-        filterManager.addFilter(new UserFilter(UserUtilities.getLoggedUserId()));
-        filterManager.addFilter(new ProjectFilter(projectId));
-
+        List<Card> cards;
         if(cardCategoryId != null) {
-            filterManager.addFilter(new CardCategoryFilter(cardCategoryId));
+            cards = cardService.findAllUserProjectCards(UserUtilities.getLoggedUserId(), projectId, cardCategoryId);
+        } else {
+            cards = cardService.findAllUserProjectCards(UserUtilities.getLoggedUserId(), projectId);
         }
 
-        Integer userId = UserUtilities.getLoggedUserId();
-
-        List<Card> cards = cardService.findAllUserProjectCards(filterManager);
 
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }

@@ -1,8 +1,12 @@
 package com.portablemind.user.service;
 
+import com.portablemind.filter.Filter;
+import com.portablemind.filter.FilterManager;
 import com.portablemind.user.User;
 import com.portablemind.user.dao.UserDao;
 
+import com.portablemind.user.filter.UserIdFilter;
+import com.portablemind.user.filter.UserMailFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,16 +23,36 @@ public class UserServiceImpl implements UserService {
     @Inject
     private UserDao userDao;
 
+    @Override
     public void saveUser(User user) { userDao.saveUser(user);}
 
+    @Override
     public void updateUser(User user) { userDao.updateUser(user);}
 
-    public List<User> findAllUsers() { return userDao.findAllUsers(); }
+    @Override
+    public List<User> findAllUsers() {
+        return userDao.find(new FilterManager());
+    }
 
-    public User findById(Integer id) { return userDao.findById(id); }
+    @Override
+    public User findUser(Integer id) {
+        FilterManager filterManager = new FilterManager();
+        filterManager.addFilter(new UserIdFilter(id));
 
-    public User findByMail(String mail) { return userDao.findByMail(mail); }
+        //TODO mbrycki wyjatek
+        return userDao.find(filterManager).get(0);
+    }
 
+    @Override
+    public User findByMail(String mail) {
+        FilterManager filterManager = new FilterManager();
+        filterManager.addFilter(new UserMailFilter(mail));
+
+        //TODO mbrycki wyjatek
+        return userDao.find(filterManager).get(0);
+    }
+
+    @Override
     public void deleteUserById(Integer id) { userDao.deleteUserById(id); }
 }
 
