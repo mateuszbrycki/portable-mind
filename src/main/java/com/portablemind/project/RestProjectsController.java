@@ -1,7 +1,7 @@
 package com.portablemind.project;
 
 import com.portablemind.project.service.ProjectService;
-import com.portablemind.user.UserUtilities;
+import util.UserUtils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class RestProjectsController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Project>> get() {
-        List<Project> projects = projectService.findAllUserProjects(UserUtilities.getLoggedUserId());
+        List<Project> projects = projectService.findAllUserProjects(UserUtils.getLoggedUserId());
 
         return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
     }

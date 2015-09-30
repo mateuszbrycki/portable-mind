@@ -1,9 +1,9 @@
-<%@ page import="com.portablemind.user.UserUtilities" %>
+<%@ page import="util.UserUtils" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<c:set var="hasUserProjects" scope="session" value="<%=UserUtilities.hasUserProjects()%>"/>
+<c:set var="hasUserProjects" scope="session" value="<%=UserUtils.hasUserProjects()%>"/>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">

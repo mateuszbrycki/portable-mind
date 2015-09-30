@@ -5,7 +5,7 @@ import com.portablemind.card.service.CardService;
 import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.cardCategory.service.CardCategoryService;
 import com.portablemind.project.service.ProjectService;
-import com.portablemind.user.UserUtilities;
+import util.UserUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +31,7 @@ public class ProjectController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String get(@PathVariable("projectId") Integer projectId, ModelMap model) {
-        Integer userId = UserUtilities.getLoggedUserId();
+        Integer userId = UserUtils.getLoggedUserId();
 
         Project project = projectService.findProject(projectId);
         model.addAttribute("project", project);
@@ -47,7 +47,6 @@ public class ProjectController {
         model.addAttribute("cardCategories", cardCategories);
 
         return this.viewPath + "list";
-
     }
 
 

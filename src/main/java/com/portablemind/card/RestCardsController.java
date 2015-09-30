@@ -1,10 +1,8 @@
 package com.portablemind.card;
 
 import com.portablemind.card.service.CardService;
-import com.portablemind.filter.FilterManager;
-import com.portablemind.user.UserUtilities;
+import util.UserUtils;
 
-import com.portablemind.user.filter.OwnerIdFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +22,7 @@ public class RestCardsController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Card>> get() {
 
-        Integer userId = UserUtilities.getLoggedUserId();
+        Integer userId = UserUtils.getLoggedUserId();
 
         List<Card> cards = cardService.findAllUserCards(userId);
 

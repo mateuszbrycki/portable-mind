@@ -1,13 +1,16 @@
 package com.portablemind.project;
 
-import com.portablemind.app.Response;
 import com.portablemind.card.Card;
 import com.portablemind.card.service.CardService;
 import com.portablemind.cardCategory.service.CardCategoryService;
+import com.portablemind.project.exception.ProjectNotFoundException;
 import com.portablemind.project.service.ProjectService;
+import com.portablemind.rest.api.exceptions.ForbiddenRestApiException;
+import com.portablemind.rest.api.exceptions.ResourceNotFoundRestApiException;
 import com.portablemind.user.UserSecurity;
-import com.portablemind.user.UserUtilities;
+import util.UserUtils;
 
+import com.portablemind.user.exception.UserNotFoundException;
 import com.portablemind.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,13 +44,19 @@ public class RestProjectController {
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<List<Project>> addProject(@RequestBody ProjectDTO projectDTO) {
-        Integer userId = UserUtilities.getLoggedUserId();
+        Integer userId = UserUtils.getLoggedUserId();
 
         Project project = new Project();
 
         project.setName(projectDTO.getName());
         project.setDescription(projectDTO.getDescription());
-        project.setOwner(userService.findUser(userId));
+
+        try {
+            project.setOwner(userService.findUser(userId));
+        } catch (UserNotFoundException e) {
+            throw new ResourceNotFoundRestApiException()
+                    .userMessage(e.getMessage());
+        }
 
         Integer id = projectDTO.getId();
 
@@ -71,11 +80,11 @@ public class RestProjectController {
 
     @RequestMapping(value=ProjectUrls.Api.PROJECT_ID, method = RequestMethod.DELETE)
     public ResponseEntity<List<Project>> delete(@PathVariable("projectId") Integer projectId) {
-        Integer userId = UserUtilities.getLoggedUserId();
+        Integer userId = UserUtils.getLoggedUserId();
+
         if(projectService.findProject(projectId).getOwner().getId() != userId) {
-            //return new ResponseEntity<Response>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
-            //TODO mbrycki chujowo, przemyśleć
-            return null;
+            throw new ForbiddenRestApiException()
+                    .userMessage("You don't have permissions.");
         }
 
         projectService.deleteProjectById(projectId);
@@ -93,11 +102,18 @@ public class RestProjectController {
     @RequestMapping(value=ProjectUrls.Api.PROJECT_ID, method = RequestMethod.GET)
     public ResponseEntity<Object> get(@PathVariable("projectId") Integer projectId) {
 
-        if (projectService.getProjectOwner(projectId) != UserUtilities.getLoggedUserId()) {
-            return new ResponseEntity<Object>(new Response("message", "You don't have permissions."), HttpStatus.FORBIDDEN);
+        Project project;
+        try {
+            project = projectService.findProject(projectId);
+        } catch (ProjectNotFoundException e) {
+            throw new ResourceNotFoundRestApiException()
+                    .userMessage(e.getMessage());
         }
 
-        Project project = projectService.findProject(projectId);
+        if (project.getOwner().getId() != UserUtils.getLoggedUserId()) {
+            throw new ForbiddenRestApiException()
+                    .userMessage("You don't have permissions.");
+        }
 
         return new ResponseEntity<Object>(project, HttpStatus.OK);
 
@@ -108,11 +124,10 @@ public class RestProjectController {
                                                              @RequestParam(value = "category", required = false) Integer cardCategoryId) {
         List<Card> cards;
         if(cardCategoryId != null) {
-            cards = cardService.findAllUserProjectCards(UserUtilities.getLoggedUserId(), projectId, cardCategoryId);
+            cards = cardService.findAllUserProjectCards(UserUtils.getLoggedUserId(), projectId, cardCategoryId);
         } else {
-            cards = cardService.findAllUserProjectCards(UserUtilities.getLoggedUserId(), projectId);
+            cards = cardService.findAllUserProjectCards(UserUtils.getLoggedUserId(), projectId);
         }
-
 
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }

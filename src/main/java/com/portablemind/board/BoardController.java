@@ -3,12 +3,10 @@ package com.portablemind.board;
 import com.portablemind.card.service.CardService;
 import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.cardCategory.service.CardCategoryService;
-import com.portablemind.filter.FilterManager;
 import com.portablemind.project.Project;
 import com.portablemind.project.service.ProjectService;
-import com.portablemind.user.UserUtilities;
+import util.UserUtils;
 
-import com.portablemind.user.filter.OwnerIdFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +34,7 @@ public class BoardController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getBoard(ModelMap model) {
-        Integer userId = UserUtilities.getLoggedUserId();
+        Integer userId = UserUtils.getLoggedUserId();
 
         /*List<Card> cards = cardService.findAllUserCards(userId);
         model.addAttribute("cards", cards);*/

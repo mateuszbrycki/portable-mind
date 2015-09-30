@@ -3,6 +3,7 @@ package com.portablemind.project.service;
 import com.portablemind.filter.FilterManager;
 import com.portablemind.project.Project;
 import com.portablemind.project.dao.ProjectDao;
+import com.portablemind.project.exception.ProjectNotFoundException;
 import com.portablemind.project.filter.ProjectIdFilter;
 import com.portablemind.user.filter.OwnerIdFilter;
 import org.springframework.stereotype.Service;
@@ -38,9 +39,13 @@ public class ProjectServiceImpl implements ProjectService {
     public Project findProject(Integer id) {
         FilterManager filterManager = new FilterManager();
         filterManager.addFilter(new ProjectIdFilter(id));
+        List<Project> projects = dao.find(filterManager);
 
-        //TODO mbrycki wyjątek
-        return dao.find(filterManager).get(0);
+        if(projects.isEmpty()) {
+            throw new ProjectNotFoundException("Project " + id + " not found");
+        }
+
+        return projects.get(0);
     }
 
     @Override

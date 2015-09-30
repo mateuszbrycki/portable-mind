@@ -3,13 +3,12 @@ package com.portablemind.card.service;
 import com.portablemind.card.Card;
 import com.portablemind.card.dao.CardDao;
 
+import com.portablemind.card.exception.CardNotFoundException;
 import com.portablemind.card.filter.CardCardCategoryIdFilter;
 import com.portablemind.card.filter.CardIdFilter;
 import com.portablemind.card.filter.CardProjectIdFilter;
 import com.portablemind.filter.FilterManager;
-import com.portablemind.user.UserUtilities;
 import com.portablemind.user.filter.OwnerIdFilter;
-import com.portablemind.user.filter.UserIdFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,8 +83,12 @@ public class CardServiceImpl implements CardService {
 
         FilterManager filterManager = new FilterManager();
         filterManager.addFilter(new CardIdFilter(id));
+        List<Card> cards = dao.find(filterManager);
 
-        //TODO mbrycki złapać wyjątek i wyrzucić nowy
+        if(cards.isEmpty()) {
+            throw new CardNotFoundException("Card " + id + " not found.");
+        }
+
         return dao.find(filterManager).get(0);
     }
 

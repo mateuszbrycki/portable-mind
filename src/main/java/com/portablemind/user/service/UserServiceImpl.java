@@ -5,6 +5,7 @@ import com.portablemind.filter.FilterManager;
 import com.portablemind.user.User;
 import com.portablemind.user.dao.UserDao;
 
+import com.portablemind.user.exception.UserNotFoundException;
 import com.portablemind.user.filter.UserIdFilter;
 import com.portablemind.user.filter.UserMailFilter;
 import org.springframework.stereotype.Service;
@@ -38,18 +39,26 @@ public class UserServiceImpl implements UserService {
     public User findUser(Integer id) {
         FilterManager filterManager = new FilterManager();
         filterManager.addFilter(new UserIdFilter(id));
+        List<User> users = userDao.find(filterManager);
 
-        //TODO mbrycki wyjatek
-        return userDao.find(filterManager).get(0);
+        if(users.size() != 1) {
+            throw new UserNotFoundException("User " + id + " not found.");
+        }
+
+        return users.get(0);
     }
 
     @Override
     public User findByMail(String mail) {
         FilterManager filterManager = new FilterManager();
         filterManager.addFilter(new UserMailFilter(mail));
+        List<User> users = userDao.find(filterManager);
 
-        //TODO mbrycki wyjatek
-        return userDao.find(filterManager).get(0);
+        if(users.size() != 1) {
+            throw new UserNotFoundException("User with " + mail + " not found.");
+        }
+
+        return users.get(0);
     }
 
     @Override

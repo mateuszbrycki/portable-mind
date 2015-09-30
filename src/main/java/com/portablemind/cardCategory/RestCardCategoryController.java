@@ -15,7 +15,7 @@ public class RestCardCategoryController {
 
         System.out.println(cardCategory.getFile().getName());
 
-        /*cardCategory.setOwner(UserUtilities.getLoggedUserId());
+        /*cardCategory.setOwner(UserUtils.getLoggedUserId());
         service.saveCardCategory(cardCategory);*/
 
         return new ResponseEntity<Response>(new Response("message", "New card category successfully added!"), HttpStatus.OK);

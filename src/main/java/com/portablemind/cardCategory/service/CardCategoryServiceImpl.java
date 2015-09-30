@@ -1,10 +1,9 @@
 package com.portablemind.cardCategory.service;
 
-
-import com.portablemind.card.filter.CardCardCategoryIdFilter;
 import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.cardCategory.dao.CardCategoryDao;
 
+import com.portablemind.cardCategory.exception.CardCategoryNotFoundException;
 import com.portablemind.cardCategory.filter.CardCategoryIdFilter;
 import com.portablemind.filter.FilterManager;
 import org.springframework.stereotype.Service;
@@ -40,9 +39,13 @@ public class CardCategoryServiceImpl implements CardCategoryService {
     public CardCategory findById(Integer id) {
         FilterManager filterManager = new FilterManager();
         filterManager.addFilter(new CardCategoryIdFilter(id));
+        List<CardCategory> cardCategories = dao.find(filterManager);
 
-        //TODO mbrycki wyjątek
-        return dao.find(filterManager).get(0);
+        if(cardCategories.isEmpty()) {
+            throw new CardCategoryNotFoundException("Card category " + id + " not found.");
+        }
+
+        return cardCategories.get(0);
     }
 
     @Override
