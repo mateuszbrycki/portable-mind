@@ -10,14 +10,7 @@ import java.util.UUID;
 /**
  * Created by Mateusz on 30.09.2015.
  */
-/**
- * This represents a standard REST api error.
- *
- * See http://blog.apigee.com/detail/restful_api_design_what_about_errors/ for the rationale behind this class.
- *
- * @author Adib Saikali
- *
- */
+
 public class RestApiError
 {
     private final int httpStatus;

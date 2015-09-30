@@ -6,13 +6,7 @@ package com.portablemind.rest.api;
 
 import java.util.UUID;
 
-/**
- *
- * @author Adib Saikali
- */
 public class ApiErrorCodes {
-    //@formatter:off
-
     public final static UUID UANBLE_TO_PARSE_REQUEST    = UUID.fromString("a05500d4-f689-4cd7-a814-df83c0effb5c");
     public final static UUID BIND_EXCEPTION             = UUID.fromString("9314486f-27b2-455b-a352-5c8fa69fdbe9");
     public final static UUID TYPE_MISMATCH_EXCEPTION    = UUID.fromString("ef1afabc-1545-458e-a380-cbe552ea7077");

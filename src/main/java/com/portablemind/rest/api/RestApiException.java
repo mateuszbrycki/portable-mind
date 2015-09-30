@@ -23,7 +23,7 @@ public class RestApiException extends RuntimeException {
     }
 
     public RestApiError getRestApiError() {
-        return restApiError ;
+        return restApiError;
     }
 
 }
