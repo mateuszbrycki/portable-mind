@@ -1,14 +1,22 @@
 package com.portablemind.card;
 
+import org.hibernate.validator.constraints.Length;
+
 /**
  * Created by Mateusz Brycki on 09/05/2015.
  */
 public class CardDTO {
 
     private Integer id;
+
+    @Length(min = 5)
     private String description;
+
+    @Length(min = 5)
     private String name;
+
     private Integer project;
+
     private Integer category;
 
     public Integer getId() {

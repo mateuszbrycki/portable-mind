@@ -371,64 +371,6 @@ $(document).ready(function() {
         showAddCardCategoryForm();
     });
 
-    $('#add-card-form').validate( {
-        rules:
-        {
-            project:
-            {
-                required: true
-            },
-            category:
-            {
-                required: true,
-                number: true
-            },
-            description:
-            {
-                required: true,
-                minlength:5
-            }
-        }
-    });
-
-    $('#user-register-form').validate( {
-        rules:
-        {
-            mail:
-            {
-                required: true,
-                email: true
-            },
-            password:
-            {
-                required: true,
-                minlength:3
-            },
-            password_repeat:
-            {
-                required: true,
-                minlength:3
-            }
-        }
-    });
-
-    $('#add-project-form').validate( {
-        rules:
-        {
-            name:
-            {
-                required: true,
-                minlength:5
-            },
-
-            description:
-            {
-                required: true,
-                minlength:5
-            }
-        }
-    });
-
     $(document).on('submit', '#add-project-form', function(e) {
         var frm = $('#add-project-form');
         e.preventDefault();
@@ -706,5 +648,109 @@ $(document).ready(function() {
     $(document).on('click', '.edit-project-form-close', function() {
         refreshForm($('#edit-project-form'));
         $("#edit-project-modal").modal('hide');
+    });
+
+    $('#add-ard-form').validate( {
+        rules:
+        {
+            project:
+            {
+                required: true
+            },
+            category:
+            {
+                required: true,
+                number: true
+            },
+            name:
+            {
+                required: true,
+                minlength: 5
+            },
+            description:
+            {
+                required: true,
+                minlength: 5
+            }
+        }
+    });
+
+    $('#edit-ard-form').validate( {
+        rules:
+        {
+            project:
+            {
+                required: true,
+                number: true
+            },
+            category:
+            {
+                required: true,
+                number: true
+            },
+            name:
+            {
+                required: true,
+                minlength: 5
+            },
+            description:
+            {
+                required: true,
+                minlength: 5
+            }
+        }
+    });
+
+    $('#add-roject-form').validate( {
+        rules:
+        {
+            name:
+            {
+                required: true,
+                minlength: 5
+            },
+            description:
+            {
+                required: true,
+                minlength: 5
+            }
+        }
+    });
+
+    $('#edit-roject-form').validate( {
+        rules:
+        {
+            name:
+            {
+                required: true,
+                minlength: 5
+            },
+            description:
+            {
+                required: true,
+                minlength: 5
+            }
+        }
+    });
+
+    $('#user-register-form').validate( {
+        rules:
+        {
+            mail:
+            {
+                required: true,
+                email: true
+            },
+            password:
+            {
+                required: true,
+                minlength:3
+            },
+            password_repeat:
+            {
+                required: true,
+                minlength:3
+            }
+        }
     });
 });

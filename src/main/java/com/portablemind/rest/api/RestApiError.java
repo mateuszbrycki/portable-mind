@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.web.client.HttpStatusCodeException;
 import util.JacksonUtils;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -17,6 +18,7 @@ public class RestApiError
     private UUID apiCode;
     private String userMessage;
     private String developerMessage;
+    private List<RestApiValidationError> validationErrors;
 
     @JsonCreator
     public RestApiError(@JsonProperty("httpStatus") RestApiHttpStatus httpStatus)
@@ -71,6 +73,17 @@ public class RestApiError
     public RestApiError setDeveloperMessage(String developerMessage)
     {
         this.developerMessage = developerMessage;
+        return this;
+    }
+
+    public List<RestApiValidationError> getValidationErrors()
+    {
+        return validationErrors;
+    }
+
+    public RestApiError setValidationErros(List<RestApiValidationError> restApiFieldErrors)
+    {
+        this.validationErrors = restApiFieldErrors;
         return this;
     }
 }

@@ -2,22 +2,20 @@ package com.portablemind.card;
 
 import com.portablemind.card.exception.CardNotFoundException;
 import com.portablemind.card.service.CardService;
-import com.portablemind.cardCategory.exception.CardCategoryNotFoundException;
 import com.portablemind.cardCategory.service.CardCategoryService;
-import com.portablemind.project.exception.ProjectNotFoundException;
 import com.portablemind.project.service.ProjectService;
 import com.portablemind.rest.api.RestApiException;
 import com.portablemind.rest.api.exceptions.ForbiddenRestApiException;
 import com.portablemind.rest.api.exceptions.ResourceNotFoundRestApiException;
 import util.UserUtils;
 
-import com.portablemind.user.exception.UserNotFoundException;
 import com.portablemind.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -37,7 +35,7 @@ public class RestCardController {
     UserService userService;
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<List<Card>> put(@RequestBody CardDTO cardDTO) {
+    public ResponseEntity<List<Card>> put(@RequestBody @Valid  CardDTO cardDTO) {
 
         Integer userId = UserUtils.getLoggedUserId();
         Integer projectId = cardDTO.getProject();

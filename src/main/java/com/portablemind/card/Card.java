@@ -3,6 +3,7 @@ package com.portablemind.card;
 import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.project.Project;
 import com.portablemind.user.User;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,10 +35,12 @@ public class Card {
     private Project project;
 
     @Column(name="card_name")
+    @Length(min = 5)
     private String name;
 
     @NotNull
     @Column(name="card_description")
+    @Length(min = 5)
     private String description;
 
     public Card() {}

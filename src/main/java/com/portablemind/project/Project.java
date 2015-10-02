@@ -1,6 +1,8 @@
 package com.portablemind.project;
 
 import com.portablemind.user.User;
+import org.hibernate.validator.constraints.Length;
+
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
@@ -22,9 +24,11 @@ public class Project {
 
     @NotNull
     @Column(name="name")
+    @Length(min = 5)
     private String name;
 
     @Column(name="description")
+    @Length(min = 5)
     private String description;
 
     public Project() {}

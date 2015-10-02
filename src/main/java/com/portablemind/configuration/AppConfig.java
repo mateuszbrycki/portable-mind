@@ -25,7 +25,7 @@ import java.util.Locale;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan({"com.portablemind.*"})
+@ComponentScan({"com.portablemind"})
 @Import({ SecurityConfig.class })
 @PropertySource(value = { "classpath:application.properties" })
 public class AppConfig extends WebMvcConfigurerAdapter {

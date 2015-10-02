@@ -1,5 +1,9 @@
 package com.portablemind.rest.api;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
@@ -16,9 +20,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.UUID;
-
 
 /**
  * Created by Mateusz on 30.09.2015.
@@ -29,8 +30,7 @@ public class RestControllerAdvice
     private static Logger logger = LoggerFactory.getLogger(RestControllerAdvice.class);
     protected final static String JSON = "application/json";
 
-    protected ResponseEntity<RestApiError> createResponseEntity(RestApiError restApiError)
-    {
+    protected ResponseEntity<RestApiError> createResponseEntity(RestApiError restApiError) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -40,16 +40,13 @@ public class RestControllerAdvice
     }
 
     @ExceptionHandler(RestApiException.class)
-    public ResponseEntity<RestApiError> handleRestApiException(RestApiException e)
-    {
+    public ResponseEntity<RestApiError> handleRestApiException(RestApiException e) {
         logger.error("Api Error caused by exception", e);
         return this.createResponseEntity(e.getRestApiError());
     }
 
-
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<RestApiError> handleException(Exception e)
-    {
+    public ResponseEntity<RestApiError> handleException(Exception e) {
         logger.error("Api Error caused by exception", e);
         RestApiError restApiError = new RestApiError(RestApiHttpStatus.INTERNAL_SERVER_ERROR);
         restApiError.setApiCode(ApiErrorCodes.UNHANDLED_SERVER_EXCEPTION);
@@ -67,8 +64,7 @@ public class RestControllerAdvice
      * @return
      */
     @ExceptionHandler(TypeMismatchException.class)
-    public ResponseEntity<RestApiError> handleTypeMismatchException(TypeMismatchException e)
-    {
+    public ResponseEntity<RestApiError> handleTypeMismatchException(TypeMismatchException e) {
         logger.error("Api Error caused by exception", e);
         RestApiError restApiError = new RestApiError(RestApiHttpStatus.BAD_REQUEST);
         restApiError.setApiCode(ApiErrorCodes.TYPE_MISMATCH_EXCEPTION);
@@ -79,8 +75,7 @@ public class RestControllerAdvice
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<RestApiError> handleHttpMessageNotReadableException(HttpMessageNotReadableException e)
-    {
+    public ResponseEntity<RestApiError> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         logger.error("Api Error caused by exception", e);
         RestApiError restApiError = new RestApiError(RestApiHttpStatus.BAD_REQUEST);
         restApiError.setApiCode(ApiErrorCodes.UANBLE_TO_PARSE_REQUEST);
@@ -99,24 +94,19 @@ public class RestControllerAdvice
      * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<RestApiError> handleMethodArgumentNotValidException(MethodArgumentNotValidException e)
-    {
+    public ResponseEntity<RestApiError> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         logger.error("Api Error caused by exception", e);
         BindingResult bindingResult = e.getBindingResult();
         return restApiErrorFromBindingResult(bindingResult, ApiErrorCodes.INVALID_REQUEST_BODY);
     }
 
     @ExceptionHandler(BindException.class)
-    public ResponseEntity<RestApiError> handleBindException(BindException e)
-    {
+    public ResponseEntity<RestApiError> handleBindException(BindException e) {
         logger.error("Api Error caused by exception", e);
         return restApiErrorFromBindingResult(e, ApiErrorCodes.BIND_EXCEPTION);
     }
 
-
-
-    private ResponseEntity<RestApiError> restApiErrorFromBindingResult(BindingResult bindingResult, UUID apiErrorCode)
-    {
+    private ResponseEntity<RestApiError> restApiErrorFromBindingResult(BindingResult bindingResult, UUID apiErrorCode) {
         // Create an Api Error and return it
         RestApiError restApiError = new RestApiError(RestApiHttpStatus.BAD_REQUEST);
         restApiError.setApiCode(apiErrorCode);
@@ -124,8 +114,8 @@ public class RestControllerAdvice
         restApiError.setDeveloperMessage("Invalid request body see validation errors");
 
         // Extract field errors
-       /* List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-        List<RestApiValidationError> restApiFieldErrors = new ArrayList<>();
+        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+        List<RestApiValidationError> restApiFieldErrors = new ArrayList<RestApiValidationError>();
         for (FieldError fieldError : fieldErrors)
         {
             RestApiValidationError restApiFieldError = new RestApiValidationError();
@@ -136,7 +126,7 @@ public class RestControllerAdvice
         if (restApiFieldErrors.isEmpty() == false)
         {
             restApiError.setValidationErros(restApiFieldErrors);
-        }*/
+        }
 
         return createResponseEntity(restApiError);
     }
