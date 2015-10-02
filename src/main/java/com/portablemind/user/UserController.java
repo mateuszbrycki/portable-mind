@@ -3,6 +3,7 @@ package com.portablemind.user;
 import com.portablemind.user.service.UserService;
 import com.portablemind.userrole.service.UserRoleService;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ public class UserController {
 
     @Inject
     private UserRoleService userRoleService;
+
+    @Inject
+    private PasswordEncoder passwordEncoder;
 
     private String viewPath = "controller/user/";
 
@@ -65,12 +69,12 @@ public class UserController {
                                ModelMap model) {
 
         Boolean equals = password.equals(passwordRepeat);
-        User checkedUser = userService.findByMail(mail);
+        Boolean userExists = userService.checkIfUserWithMailExists(mail);
 
-        if(checkedUser == null && equals) {
+        if(userExists == false && equals) {
             User user = new User();
             user.setMail(mail);
-            user.setPassword(password);
+            user.setPassword(passwordEncoder.encode(password));
             user.setIsEnabled(User.DEFAULT_IS_ENABLED);
             user.setIsPublic(User.DEFAULT_IS_PUBLIC);
             user.setRole(userRoleService.findByName(User.DEFAULT_ROLE));
@@ -81,7 +85,7 @@ public class UserController {
 
         } else {
 
-            if(checkedUser != null) {
+            if(userExists != null) {
                 model.addAttribute("error", "Passed mail is in use.");
             } else {
                 model.addAttribute("error", "Passwords are not equals.");

@@ -62,6 +62,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean checkIfUserWithMailExists(String mail) {
+        FilterManager filterManager = new FilterManager();
+        filterManager.addFilter(new UserMailFilter(mail));
+        List<User> users = userDao.find(filterManager);
+
+        if(users.size() == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
     public void deleteUserById(Integer id) { userDao.deleteUserById(id); }
 }
 
