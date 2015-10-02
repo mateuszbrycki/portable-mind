@@ -650,7 +650,7 @@ $(document).ready(function() {
         $("#edit-project-modal").modal('hide');
     });
 
-    $('#add-ard-form').validate( {
+    $('#add-card-form').validate( {
         rules:
         {
             project:
@@ -675,7 +675,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#edit-ard-form').validate( {
+    $('#edit-card-form').validate( {
         rules:
         {
             project:
@@ -701,7 +701,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#add-roject-form').validate( {
+    $('#add-project-form').validate( {
         rules:
         {
             name:
@@ -717,7 +717,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#edit-roject-form').validate( {
+    $('#edit-project-form').validate( {
         rules:
         {
             name:
