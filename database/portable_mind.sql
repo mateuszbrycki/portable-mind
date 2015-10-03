@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `card` (
   `card_name` text,
   `audit_cd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `audit_md` timestamp NULL DEFAULT NULL,
-  `card_description` varchar(255) CHARACTER SET utf8 COLLATE utf8_polish_ci DEFAULT NULL
+  `card_description` text CHARACTER SET utf8 COLLATE utf8_polish_ci DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
