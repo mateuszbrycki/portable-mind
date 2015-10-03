@@ -98,7 +98,7 @@ function refreshBoardTable(data) {
         newPanelGroup.appendChild(panelDefault);
     }
     oldPanelGroup.parentElement.replaceChild(newPanelGroup, oldPanelGroup);
-    SyntaxHighlighter.all();
+    
 }
 
 function refreshCardList(data) {
@@ -149,9 +149,7 @@ function refreshCardList(data) {
             var panelBody = document.createElement('div');
             panelBody.className = 'panel-body';
 
-            var projectDescription = document.createTextNode(data[i].description);
-
-            panelBody.appendChild(projectDescription);
+            panelBody.innerHTML = data[i].description;
             panelCollapse.appendChild(panelBody);
 
             panelDefault.appendChild(panelCollapse);
@@ -197,7 +195,9 @@ function refreshCardList(data) {
     }
     oldPanelGroup.parentElement.replaceChild(newPanelGroup, oldPanelGroup);
 
-    SyntaxHighlighter.all();
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
 }
 
 function refreshCardCategoriesSelect(data) {

@@ -18,8 +18,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/msdropdown_dd.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/styles.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-glyphicons.css" />">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/shCore.css" />"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/shThemeEclipse.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/css/default.css" />">
 
     <script>
         var ctx = "${pageContext.request.contextPath}";
@@ -47,17 +46,9 @@
     <script src="<c:url value="/resources/js/jquery_cookie_1_4_1.js" />" type="text/javascript"></script>
     <script src="<c:url value="/resources/js/jquery_validate_1_12_0_min.js" />"></script>
     <script src="<c:url value="/resources/js/common.js" />" type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/highlight.pack.js" />" type="text/javascript"></script>
 
-    <script src="<c:url value="/resources/js/shCore.js" />" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/shBrushPhp.js" />" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/shBrushSql.js" />" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/shBrushJava.js" />" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/shBrushJScript.js" />" type="text/javascript"></script>
-    <script src="<c:url value="/resources/js/shBrushPowerShell.js" />" type="text/javascript"></script>
-
-    <script type="text/javascript">
-      SyntaxHighlighter.all();
-    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body>
