@@ -223,7 +223,6 @@ function refreshCardCategoriesSelect(data) {
     }
     newSelectDiv.appendChild(newSelect);
     oldSelectDiv.parentNode.replaceChild(newSelectDiv, oldSelectDiv);
-    SyntaxHighlighter.all();
 }
 
 function refreshProjectSelect(data) {
@@ -249,7 +248,6 @@ function refreshProjectSelect(data) {
     }
     newSelectDiv.appendChild(newSelect);
     oldSelectDiv.parentNode.replaceChild(newSelectDiv, oldSelectDiv);
-    SyntaxHighlighter.all();
 }
 
 function reloadCardCategories() {
