@@ -1,5 +1,6 @@
 package com.portablemind.card;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.portablemind.cardCategory.CardCategory;
 import com.portablemind.project.Project;
 import com.portablemind.user.User;
@@ -22,6 +23,7 @@ public class Card {
     @OneToOne
     @NotNull
     @JoinColumn(name = "fk_user_id")
+    @JsonIgnore
     private User owner;
 
     @OneToOne

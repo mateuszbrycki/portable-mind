@@ -71,6 +71,7 @@ public class RestProjectController {
             currentUser.setHasUserProjects(true);
         }
 
+        //TODO mbrycki w przypadku listowania projektów "on scroll" powinna być zwracana "aktualna pozycja"
         List<Project> projects = projectService.findAllUserProjects(userId);
 
         return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
@@ -93,6 +94,7 @@ public class RestProjectController {
         UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
         currentUser.setHasUserProjects(projectService.hasUserProjects(userId));
 
+        //TODO mbrycki w przypadku listowania projektów "on scroll" powinna być zwracana "aktualna pozycja" - filtry i strona
         List<Project> projects = projectService.findAllUserProjects(userId);
 
         return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
@@ -121,13 +123,10 @@ public class RestProjectController {
 
     @RequestMapping(value=ProjectUrls.Api.PROJECT_ID_CARDS, method = RequestMethod.GET)
     public ResponseEntity<List<Card>> getAllUserProjectCards(@PathVariable("projectId") Integer projectId,
-                                                             @RequestParam(value = "category", required = false) Integer cardCategoryId) {
-        List<Card> cards;
-        if(cardCategoryId != null) {
-            cards = cardService.findAllUserProjectCards(UserUtils.getLoggedUserId(), projectId, cardCategoryId);
-        } else {
-            cards = cardService.findAllUserProjectCards(UserUtils.getLoggedUserId(), projectId);
-        }
+                                                             @RequestParam(value = "category", required = false) Integer cardCategoryId,
+                                                             @RequestParam(value = "page", required = false) Integer page) {
+
+        List<Card> cards = cardService.findAllUserProjectCards(UserUtils.getLoggedUserId(), projectId, cardCategoryId, page);
 
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
     }

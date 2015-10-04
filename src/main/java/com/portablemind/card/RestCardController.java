@@ -3,6 +3,7 @@ package com.portablemind.card;
 import com.portablemind.card.exception.CardNotFoundException;
 import com.portablemind.card.service.CardService;
 import com.portablemind.cardCategory.service.CardCategoryService;
+import com.portablemind.filter.FilterManager;
 import com.portablemind.project.service.ProjectService;
 import com.portablemind.rest.api.RestApiException;
 import com.portablemind.rest.api.exceptions.ForbiddenRestApiException;
@@ -63,6 +64,8 @@ public class RestCardController {
             cardService.saveCard(card);
         }
 
+        //TODO mbrycki w przypadku listowania kart "on scroll" powinna być zwracana "aktualna pozycja" - filtry i strona
+
         List<Card> cards = cardService.findAllUserProjectCards(UserUtils.getLoggedUserId(), projectId);
 
         return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
@@ -88,6 +91,8 @@ public class RestCardController {
         }
 
         cardService.deleteCardById(id);
+
+        //TODO mbrycki w przypadku listowania kart "on scroll" powinna być zwracana "aktualna pozycja" - filtry i strona
 
         List<Card> cards = cardService.findAllUserProjectCards(UserUtils.getLoggedUserId(), projectId);
 

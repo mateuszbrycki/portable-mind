@@ -15,6 +15,8 @@ public interface CardDao {
 
     List<Card> find(FilterManager filterManager);
 
+    List<Card> find(FilterManager filterManager, Integer page);
+
     Integer getCardOwner(Integer id);
 
     void deleteCardById(Integer id);

@@ -1,5 +1,6 @@
 package com.portablemind.project;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.portablemind.user.User;
 import org.hibernate.validator.constraints.Length;
 
@@ -20,6 +21,7 @@ public class Project {
     @OneToOne
     @NotNull
     @JoinColumn(name = "fk_user_id")
+    @JsonIgnore
     private User owner;
 
     @NotNull

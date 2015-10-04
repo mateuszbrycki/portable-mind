@@ -45,7 +45,7 @@ public class RestControllerAdvice
         return this.createResponseEntity(e.getRestApiError());
     }
 
-    @ExceptionHandler(Exception.class)
+    /*@ExceptionHandler(Exception.class)
     public ResponseEntity<RestApiError> handleException(Exception e) {
         logger.error("Api Error caused by exception", e);
         RestApiError restApiError = new RestApiError(RestApiHttpStatus.INTERNAL_SERVER_ERROR);
@@ -54,7 +54,7 @@ public class RestControllerAdvice
         restApiError.setDeveloperMessage("The server encountred an unhandled exception and could not complete the request");
 
         return createResponseEntity(restApiError);
-    }
+    }*/
 
     /**
      * According to the SpringMVC documentation. A @PathVariable argument can be of any simple type such as int, long, Date, etc. Spring

@@ -64,18 +64,26 @@ public class CardServiceImpl implements CardService {
         filterManager.addFilter(new OwnerIdFilter(userId));
         filterManager.addFilter(new CardProjectIdFilter(projectId));
 
+
         return dao.find(filterManager);
     }
 
     @Override
-    public List<Card> findAllUserProjectCards(Integer userId, Integer projectId, Integer categoryId) {
+    public List<Card> findAllUserProjectCards(Integer userId, Integer projectId, Integer categoryId, Integer page) {
 
         FilterManager filterManager = new FilterManager();
         filterManager.addFilter(new OwnerIdFilter(userId));
         filterManager.addFilter(new CardProjectIdFilter(projectId));
-        filterManager.addFilter(new CardCardCategoryIdFilter(categoryId));
 
-        return dao.find(filterManager);
+        if(categoryId != null) {
+            filterManager.addFilter(new CardCardCategoryIdFilter(categoryId));
+        }
+
+        if(page == null) {
+            page = 0;
+        }
+
+        return dao.find(filterManager, page);
     }
 
     @Override

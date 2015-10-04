@@ -11,6 +11,9 @@ import com.portablemind.user.service.UserService;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
@@ -21,6 +24,7 @@ import java.util.List;
  */
 
 @Repository("cardDao")
+@PropertySource(value = { "classpath:application.properties" })
 public class CardDaoImpl extends AbstractDao implements CardDao {
 
     @Inject
@@ -31,6 +35,9 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
 
     @Inject
     UserService userService;
+
+    @Value("${card.per_page}")
+    private Integer perPage;
 
     @Override
     public void saveCard(Card card) {
@@ -46,6 +53,20 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
 
         Criteria criteria = getSession().createCriteria(Card.class);
         criteria = HibernatePrepareFilters.prepareCriteria(criteria, filterManager);
+        List<Card> cards = criteria.list();
+
+        return cards;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Card> find(FilterManager filterManager, Integer page) {
+
+        Criteria criteria = getSession().createCriteria(Card.class);
+        criteria = HibernatePrepareFilters.prepareCriteria(criteria, filterManager);
+
+        criteria.setMaxResults(this.perPage)
+                .setFirstResult(this.perPage * page);
         List<Card> cards = criteria.list();
 
         return cards;

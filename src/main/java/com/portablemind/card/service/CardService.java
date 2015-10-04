@@ -19,9 +19,9 @@ public interface CardService {
 
     List<Card> findAllProjectCards(Integer id);
 
-    List<Card> findAllUserProjectCards(Integer userId, Integer projectId);
+    List<Card>  findAllUserProjectCards(Integer userId, Integer projectId);
 
-    List<Card> findAllUserProjectCards(Integer userId, Integer projectId, Integer categoryId);
+    List<Card> findAllUserProjectCards(Integer userId, Integer projectId, Integer categoryId, Integer page);
 
     Card findCard(Integer id);
 
