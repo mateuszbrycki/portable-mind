@@ -36,7 +36,7 @@ public class ProjectController {
         Project project = projectService.findProject(projectId);
         model.addAttribute("project", project);
 
-        List<Card> cards = cardService.findAllProjectCards(projectId);
+        List<Card> cards = cardService.findFirstPageProjectCards(projectId);
         model.addAttribute("cards", cards);
 
 

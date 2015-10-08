@@ -23,11 +23,11 @@
     </div>
   </div>
   <div id="card-list">
-    <div id="panel-group" id="accordion">
+    <div id="panel-group-cards" id="accordion">
       <c:choose>
         <c:when test="${fn:length(cards) gt 0}">
           <c:forEach items="${cards}" var="card">
-            <div class="panel panel-default">
+            <div class="panel panel-default" id="card-${card.id}">
               <div class="panel-heading">
                 <c:if test="${not empty card.category.icon}">
                   <img src="<c:url value="${card.category.icon}" />" alt="${card.category.name}" class="category-icon"/>

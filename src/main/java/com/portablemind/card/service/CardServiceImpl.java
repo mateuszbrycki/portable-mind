@@ -58,6 +58,15 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public List<Card> findFirstPageProjectCards(Integer id) {
+
+        FilterManager filterManager = new FilterManager();
+        filterManager.addFilter(new CardProjectIdFilter(id));
+
+        return dao.find(filterManager, 0);
+    }
+
+    @Override
     public List<Card> findAllUserProjectCards(Integer userId, Integer projectId) {
 
         FilterManager filterManager = new FilterManager();

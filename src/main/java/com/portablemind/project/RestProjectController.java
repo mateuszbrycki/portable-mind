@@ -43,7 +43,7 @@ public class RestProjectController {
 
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<List<Project>> addProject(@RequestBody ProjectDTO projectDTO) {
+    public ResponseEntity<Project> addProject(@RequestBody ProjectDTO projectDTO) {
         Integer userId = UserUtils.getLoggedUserId();
 
         Project project = new Project();
@@ -71,16 +71,13 @@ public class RestProjectController {
             currentUser.setHasUserProjects(true);
         }
 
-        //TODO mbrycki w przypadku listowania projektów "on scroll" powinna być zwracana "aktualna pozycja"
-        List<Project> projects = projectService.findAllUserProjects(userId);
-
-        return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
+        return new ResponseEntity<Project>(project, HttpStatus.OK);
     }
 
 
 
     @RequestMapping(value=ProjectUrls.Api.PROJECT_ID, method = RequestMethod.DELETE)
-    public ResponseEntity<List<Project>> delete(@PathVariable("projectId") Integer projectId) {
+    public ResponseEntity<Integer> delete(@PathVariable("projectId") Integer projectId) {
         Integer userId = UserUtils.getLoggedUserId();
 
         if(projectService.findProject(projectId).getOwner().getId() != userId) {
@@ -94,10 +91,7 @@ public class RestProjectController {
         UserSecurity currentUser = (UserSecurity)auth.getPrincipal();
         currentUser.setHasUserProjects(projectService.hasUserProjects(userId));
 
-        //TODO mbrycki w przypadku listowania projektów "on scroll" powinna być zwracana "aktualna pozycja" - filtry i strona
-        List<Project> projects = projectService.findAllUserProjects(userId);
-
-        return new ResponseEntity<List<Project>>(projects, HttpStatus.OK);
+        return new ResponseEntity<Integer>(projectId, HttpStatus.OK);
 
     }
     

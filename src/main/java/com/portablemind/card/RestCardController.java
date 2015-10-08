@@ -36,7 +36,7 @@ public class RestCardController {
     UserService userService;
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<List<Card>> put(@RequestBody @Valid  CardDTO cardDTO) {
+    public ResponseEntity<Card> put(@RequestBody @Valid  CardDTO cardDTO) {
 
         Integer userId = UserUtils.getLoggedUserId();
         Integer projectId = cardDTO.getProject();
@@ -64,15 +64,11 @@ public class RestCardController {
             cardService.saveCard(card);
         }
 
-        //TODO mbrycki w przypadku listowania kart "on scroll" powinna być zwracana "aktualna pozycja" - filtry i strona
-
-        List<Card> cards = cardService.findAllUserProjectCards(UserUtils.getLoggedUserId(), projectId);
-
-        return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
+        return new ResponseEntity<Card>(card, HttpStatus.OK);
     }
 
     @RequestMapping(value = CardUrls.Api.CARD_ID, method = RequestMethod.DELETE)
-    public ResponseEntity<List<Card>> delete(@PathVariable("cardId") Integer id) {
+    public ResponseEntity<Integer> delete(@PathVariable("cardId") Integer id) {
         Integer userId = UserUtils.getLoggedUserId();
 
         Card card;
@@ -92,11 +88,7 @@ public class RestCardController {
 
         cardService.deleteCardById(id);
 
-        //TODO mbrycki w przypadku listowania kart "on scroll" powinna być zwracana "aktualna pozycja" - filtry i strona
-
-        List<Card> cards = cardService.findAllUserProjectCards(UserUtils.getLoggedUserId(), projectId);
-
-        return new ResponseEntity<List<Card>>(cards, HttpStatus.OK);
+        return new ResponseEntity<Integer>(id, HttpStatus.OK);
     }
 
     @RequestMapping(value = CardUrls.Api.CARD_ID, method = RequestMethod.GET)

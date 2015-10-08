@@ -8,11 +8,11 @@
 	<jsp:include page="../project/form/edit_project.jsp" />
 	<sec:authorize access="isAuthenticated()">
 		<div id="projects-list">
-			<div id="panel-group" id="accordion">
+			<div id="panel-group-projects" id="accordion">
 			<c:choose>
 				<c:when test="${fn:length(projects) gt 0}">
 					<c:forEach items="${projects}" var="project">
-						<div class="panel panel-default">
+						<div class="panel panel-default" id="project-${project.id}">
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a href="${pageContext.request.contextPath}/project/${project.id}">${project.name}</a>
