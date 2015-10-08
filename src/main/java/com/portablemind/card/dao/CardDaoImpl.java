@@ -11,6 +11,7 @@ import com.portablemind.user.service.UserService;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.PropertySource;
@@ -53,6 +54,7 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
 
         Criteria criteria = getSession().createCriteria(Card.class);
         criteria = HibernatePrepareFilters.prepareCriteria(criteria, filterManager);
+        criteria.addOrder(Order.asc("id"));
         List<Card> cards = criteria.list();
 
         return cards;
@@ -67,6 +69,7 @@ public class CardDaoImpl extends AbstractDao implements CardDao {
 
         criteria.setMaxResults(this.perPage)
                 .setFirstResult(this.perPage * page);
+        criteria.addOrder(Order.asc("id"));
         List<Card> cards = criteria.list();
 
         return cards;

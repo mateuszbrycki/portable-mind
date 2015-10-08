@@ -453,6 +453,10 @@ function addCard(data) {
     panelDefault.appendChild(panelFooter);
 
     panelGroup.appendChild(panelDefault);
+
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
 }
 
 function deleteCard(id) {
