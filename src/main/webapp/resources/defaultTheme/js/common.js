@@ -864,7 +864,6 @@ $(document).ready(function() {
         });
     });
 
-    //TODO mbrycki filters from URL
     $(document).on('change', '#category-filter-select', function() {
         var value = this.value;
 
@@ -883,6 +882,7 @@ $(document).ready(function() {
             url: requestUrl,
             success: function (callback) {
                 refreshCardList(callback);
+                parameters['page'] = 0;
             },
             error: function () {
                 console.log(translations['request-failed']);
