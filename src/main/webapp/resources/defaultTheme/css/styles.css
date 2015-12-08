@@ -1,3 +1,7 @@
+.container {
+    padding-bottom: 60px;
+}
+
 #projects-list {
     margin-top: 20px;
 }
